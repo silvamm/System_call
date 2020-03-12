@@ -1,0 +1,73 @@
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>System Call</title>
+        <style type="text/css">
+            .Form{
+                padding: 100px 100px 400px;
+               
+          
+            }
+            .setor{
+               margin: 10px ;
+            }
+            .tipos{
+                margin: 10px;
+            }
+            h2{
+                margin-top: 5px;
+                color: #00BFFF;
+            }
+                    
+        </style>
+    </head>
+    <body>
+ <table>
+            <tr>
+                 <td><a href="Tela_login.html">Login</a></td>
+                 <td><a href="Tela_cadastro.html">Cadastro</a></td>
+               <td><a href="Tela_aberturadechamado.html">Abertura de Chamado</a></td>
+               <td><a href="Tela_solicitacaodechamado.html">Solicitação de Chamado</a></td>
+              
+            </tr>
+
+
+  </table>
+        
+        <div class="Form">
+            <h2>Abertura de Chamado</h2> 
+            <form>
+                <fieldset>
+                Setor Responsável:
+                <select class="setor">
+                    <option value="RH">Recursos Humanos</option>
+                    <option value="Se">Secretária</option>
+                    <option value="Fi">Financeiro</option>
+                    <option value="Bi">Biblioteca</option>
+                    <option value="Gr">Graduação</option>
+                    <option value="Po">Pós Graduação</option>
+                </select><br>
+                  Tipos de Chamados:
+                <select class="tipos">
+                    <option value="PW">Problemas com a Rede WIFI</option>
+                    <option value="Ip">Instalação de programas</option>
+                    <option value="Ar">Arcondicionado</option>
+                    <option value="Ou">Outros</option>
+                </select><br>
+                Descrição:
+                <textarea placeholder="detalhe o problema"></textarea>
+                <input type="submit" value="Enviar"><br>
+                Imagem:
+                <textarea placeholder="Anexar uma imagem"></textarea>
+                <input type="submit" value="Enviar">
+            </fieldset>
+            </form>
+        </div>
+
+
+
+
+    </body>
+    </html>
