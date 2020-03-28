@@ -4,23 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>System Call</title>
+
+    <style type="text/css">
+    
+            header{
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            padding: 9px 0;
+            text-align: center;
+            background: #069;
+            } /* configuração do background do topo do site e centralização do texto*/
+
+            .logo{
+            position: absolute;
+            width: 90px;
+            top: 0px;  
+            bottom: 0px;
+            left: 0px;
+  
+            } /* configuração da logo-marca no topo do site*/
+
+            header li{
+
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 20px;
+            } /* configurações para posicionar o texto no topo do site*/
+
+            header li{
+
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 20px;
+            } /* configurações para posicionar o texto no topo do site*/
+
+            header a{
+            text-decoration: none;
+            color:white;
+            opacity: 0.8;
+
+            } /* configuração de cor do texto do topo do site*/
+
+            a:hover{
+            opacity: 1;
+            color:black;
+
+            } /* Efeito dos botões*/
+
+            .rodape{
+
+                margin-top: 43%;
+                position: fixed;
+                left: 0;
+                top: 0;
+                text-align: center; font-size: 14px;
+                width: 100%;
+                padding: 9px 0;
+                text-align: center;
+                color: white;
+                background: #069;
+            } /* para fixar o rodape na parte inferior da tela*/
+
+
+    </style>
 </head>
 <body>
 
     <h2>System Call - Solicitação de Chamados</h2>
 
- <table>
-            <tr>
-               <td><a href="Tela_login.html">Login</a></td>
-               <td><a href="Tela_cadastro.html">Cadastro</a></td>
-               <td><a href="Tela_aberturadechamado.html">Abertura de Chamado</a></td>
-               <td><a href="Tela_solicitacaodechamado.html">Solicitação de Chamado</a></td>
+    <header>
+       
+        <div class="logo">
+                    <img src="../Imagens/Logo.png" width="80">
+                    
+        </div>
+    
+        <div class="center">
+        <nav>
+            <ul>
               
-            </tr>
-
-
-  </table>
-
+              <li><a href="Tela_cadastro.html">Cadastrar Usuário</a></li>
+              <li><a href="Tela_cadastro_setor.html">Cadastrar Setor</a></li>
+              <li><a href="Tela_solicitacaodechamado.html">Solicitação de Chamados</a></li>
+              <li><a href="Tela_login.html">Sair</a></li>
+              
+            </ul>
+    
+    
+        </nav>
+        </div>
+       </header>
     <form>
         
         
@@ -30,6 +105,7 @@
 
     </form>
 
+    <div class="rodape"> Elaborado pela equipe do projeto System Call - 2020</div>
 
 </body>
 </html>
