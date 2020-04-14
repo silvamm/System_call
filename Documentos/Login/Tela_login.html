@@ -61,7 +61,6 @@
                 }),
                 dataType: 'json',
             }).then(function (data) {
-                console.log(data)
                 document.getElementById('resposta').innerHTML = ''
                 window.location = '/Documentos/Admin/Tela_solicitacaodechamado.html'
             }).always(function (jXHR) {
@@ -73,9 +72,6 @@
             });
         })
 
-        $(document).ready(function () {
-            
-        });
     </script>
 </body>
 </html>
