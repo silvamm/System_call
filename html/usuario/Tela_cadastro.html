@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Call</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    
+    <header>
+
+        <div class="logo">
+            <img src="../../Imagens/logo.png" width="80">
+        </div>
+
+        <div class="center">
+            <nav>
+                <ul>
+                    <li><a href="Tela_adm.html">Inicio</a></li>
+                    <li><a href="Tela_cadastro_setor.html">Cadastrar Setor</a></li>
+                    <li><a href="Tela_solicitacaodechamado.html">Solicitação de Chamados</a></li>
+                    <li><a href="Tela_login.html">Sair</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <form action="#" id="form">
+
+        <fieldset>
+
+            <legend>Cadastrar Usuário</legend>
+
+            <div id="resposta"></div>
+
+            <div>
+                <label for="nome">Nome:</label>
+                <input type="text" name="name" id="nome">
+            </div>
+
+            <div>
+                <label for="tipo">Tipo de Usuário:</label>
+                <select id="tipo">
+                    <option value="0">COMUM</option>
+                    <option value="1">ADMINISTRADOR</option>
+                </select>
+            </div>
+            <div>
+                <label for="setor">Setor:</label>
+                <select id="setor">
+                    <option></option>
+                </select>
+            </div>
+            <div>
+                <label for="e-mail">Endereço de e-mail:</label>
+                <input type="text" name="e-mail" id="e-mail">
+            </div>
+            <div>
+                <label for="senha">Digite a senha:</label>
+                <input type="password" value="password" name="password" id="senha">
+            </div>
+
+
+            <div class="button">
+                <button type="submit">Cadastrar</button>
+            </div>
+
+        </fieldset>
+
+    </form>
+    <footer>
+        <div class="rodape"> Elaborado pela equipe do projeto System Call - 2020</div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $.ajax({
+                type: 'get',
+                url: 'https://softrec.com.br/setor/',
+                contentType: 'application/json',
+                dataType: 'json'
+            }).then(function (data) {
+                console.log(data)
+                var html = ''
+                $.each(data, function (index, value) {
+                    html += `<option value=${value.id}>${value.nome}</option>`
+                })
+                document.getElementById('setor').innerHTML = html
+            })
+        })
+
+        document.getElementById('form').addEventListener('submit', function (e) {
+            e.preventDefault()
+            var nome = document.getElementById('nome').value.trim()
+            var email = document.getElementById('e-mail').value.trim()
+            var senha = document.getElementById('senha').value
+            var tipo = document.getElementById('tipo').value
+            var setor = {
+                id: document.getElementById('setor').value
+            }
+
+            if (nome == '' || email == '' || senha == '') {
+                document.getElementById('resposta').innerHTML = '<strong style="color: red;">Preenchar todos os campos</strong>'
+                return
+            }
+
+            if (!validacaoEmail(email)) {
+                document.getElementById('resposta').innerHTML = '<strong style="color: red;">O e-mail é inválido</strong>'
+                return
+            }
+
+                $.ajax({
+                    type: 'post',
+                    url: 'https://softrec.com.br/usuario/',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        nome: nome,
+                        email: email,
+                        senha: senha,
+                        tipo: tipo,
+                        setor: setor
+                    }),
+                    dataType: 'json'
+                }).then(function (data) {
+                    document.getElementById('resposta').innerHTML = '<strong style="color: green;">Cadastro realizado com sucesso!</strong>'
+                    document.getElementById('nome').value = ''
+                    document.getElementById('e-mail').value = ''
+                    document.getElementById('senha').value = ''
+                }).always(function (jXHR) {
+                    if (jXHR != undefined)
+                        if (jXHR.status == 409)
+                            document.getElementById('resposta').innerHTML = '<strong style="color: red;">O e-mail já esta cadastrado</strong>'
+                })
+
+
+        })
+
+        function validacaoEmail(field) {
+            usuario = field.substring(0, field.indexOf("@"));
+            dominio = field.substring(field.indexOf("@") + 1, field.length);
+
+            if ((usuario.length >= 1) &&
+                (dominio.length >= 3) &&
+                (usuario.search("@") == -1) &&
+                (dominio.search("@") == -1) &&
+                (usuario.search(" ") == -1) &&
+                (dominio.search(" ") == -1) &&
+                (dominio.search(".") != -1) &&
+                (dominio.indexOf(".") >= 1) &&
+                (dominio.lastIndexOf(".") < dominio.length - 1)) {
+               return true
+            }
+            else {
+                return false
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>

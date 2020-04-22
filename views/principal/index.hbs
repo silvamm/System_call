@@ -1,0 +1,65 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="/principal/css/style.css">
+{{/section}}
+
+
+<div class="Form">
+  <select>
+    <option value="ca">Chamados Abertos</option>
+    <option value="cp">Chamados Pendentes</option>
+    <option value="ce">Chamados Encerrados</option>
+    <option value="tc">Todos os Chamados</option>
+  </select>
+  <select>
+    <option value="ASe">Secretária</option>
+    <option value="AFi">Financeiro</option>
+    <option value="Au">Aberto por qualquer um</option>
+    <option value="ABi">Biblioteca</option>
+    <option value="AGr">Graduação</option>
+    <option value="APo">Pós Graduação</option>
+  </select>
+  <select>
+    <option value="AQs">Qualquer tipo de solicitação</option>
+    <option value="ASE">Solicitação por E-mail</option>
+    <option value="ASy">Solicitação System Call</option>
+  </select>
+
+  <label class="busc" For="buscar">Buscar:</label>
+  <input type="search" value="" placeholder="Número da Solicitação" name="Buscar">
+</div>
+
+<table align="center">
+  <tr class="topo">
+    <th>Referência</th>
+    <th>Sumário</th>
+    <th>Tempo de chamado</th>
+    <th>Estado</th>
+    <th>Solicitante</th>
+  </tr>
+
+  <tr>
+    <td>Alp09032020002</td>
+    <td>Software</td>
+    <td>Instalação</td>
+    <td>Resolvido</td>
+    <td>Marcos20@gambr</td>
+  </tr>
+  <tr>
+    <td>Alp09032020003</td>
+    <td>Computador com Defeito</td>
+    <td>Hardware</td>
+    <td>Cancelado</td>
+    <td>LopesFrancisco.30@rec.com.br</td>
+  </tr>
+  <tr>
+    <td>Alp09032020004</td>
+    <td>Clima da sala</td>
+    <td>Arcodicionado</td>
+    <td>Encaminhado</td>
+    <td>Camilo202030@rec.com.br</td>
+  </tr>
+</table>
+
+{{#section 'js'}}
+<script src="/principal/js/script.js"></script>
+{{/section}}

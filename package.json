@@ -1,0 +1,32 @@
+{
+  "name": "system_call",
+  "version": "1.0.0",
+  "description": "Sistema de gerenciamento de chamados ",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silvamm/System_call.git"
+  },
+  "keywords": [
+    "chamados",
+    "gerenciamento"
+  ],
+  "author": "Matheus Monteiro, Levi Alves, Tamires Cruz e Patricio Marcelo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/silvamm/System_call/issues"
+  },
+  "homepage": "https://github.com/silvamm/System_call#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.3",
+    "got": "^10.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
