@@ -1,16 +1,16 @@
 $(document).ready(function () {
-    $.ajax({
-        type: 'get',
-        url: 'https://softrec.com.br/setor/',
-        contentType: 'application/json',
-        dataType: 'json'
-    }).then(function (data) {
-        var html = ''
-        $.each(data, function (index, value) {
-            html += `<option value=${value.id}>${value.nome}</option>`
-        })
-        document.getElementById('setor').innerHTML = html
-    })
+    // $.ajax({
+    //     type: 'get',
+    //     url: 'https://softrec.com.br/setor/',
+    //     contentType: 'application/json',
+    //     dataType: 'json'
+    // }).then(function (data) {
+    //     var html = ''
+    //     $.each(data, function (index, value) {
+    //         html += `<option value=${value.id}>${value.nome}</option>`
+    //     })
+    //     document.getElementById('setor').innerHTML = html
+    // })
 })
 
 document.getElementById('form').addEventListener('submit', function (e) {
