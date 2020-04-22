@@ -5,7 +5,6 @@ $(document).ready(function () {
         contentType: 'application/json',
         dataType: 'json'
     }).then(function (data) {
-        console.log(data)
         var html = ''
         $.each(data, function (index, value) {
             html += `<option value=${value.id}>${value.nome}</option>`
