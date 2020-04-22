@@ -1,14 +1,18 @@
 const express = require('express')
-const app = express()
-const got = require('got')
+const superagent = require('superagent')
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
-//  res.render('usuario/index', { title : 'titulo' })
-
-   ''
-
-})
+router.get('/', (req, res) =>
+    superagent
+        .get('https://softrec.com.br/setor/')
+        .end((error, resultado) => {
+            if (error) 
+                console.log(error)
+                
+            let setores = resultado.body
+            res.render('usuario/index', { setores })
+        })
+)
 
 module.exports = router
