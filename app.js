@@ -7,6 +7,9 @@ const port = 3000
 
 app.listen(port, () => console.log(`Funcionando | Porta : ${port}`))
 
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
+
 //config handler-bars
 app.set('views', path.join(__dirname , 'views'))
 app.set('view engine', 'hbs')
