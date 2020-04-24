@@ -5,6 +5,22 @@
             box-sizing: border-box;
         }
 
+        table{
+            margin-top: 50px;
+            text-align: center;
+            border:1px solid #ccc;
+            background: #f8f8f8;
+            box-sizing: border-box;
+        }
+        th{
+            background: #069;
+            color: white;
+        }
+
+        td{
+            padding: 20px 40px;
+            background: #ccc 1px;
+        }
 
         header{
             position: fixed;
@@ -18,11 +34,12 @@
 
         .logo{
             position: absolute;
-            width: 80px;
-            top: 0px;  
+            width: 50px;
+            top:0px;
+            right: 50px;  
             bottom: 0px;
             left: 0px;
-  
+              
         } /* configuração da logo-marca no topo do site*/
 
         header li{
