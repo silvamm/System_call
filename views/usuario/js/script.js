@@ -1,6 +1,6 @@
-$(function () {
+$(function() {
 
-    document.getElementById('form').addEventListener('submit', function (e) {
+    document.getElementById('form').addEventListener('submit', function(e) {
         e.preventDefault()
         var nome = document.getElementById('nome').value.trim()
         var email = document.getElementById('email').value.trim()
@@ -31,12 +31,13 @@ $(function () {
                 tipo: tipo,
                 setor: setor
             })
-        }).done(function () {
+        }).done(function() {
             document.getElementById('resposta').innerHTML = '<strong style="color: green;">Cadastro realizado com sucesso!</strong>'
             document.getElementById('nome').value = ''
             document.getElementById('email').value = ''
             document.getElementById('senha').value = ''
-        }).fail(function (jXHR) {
+            setTimeout(() => document.getElementById('resposta').innerHTML = '', 3000);
+        }).fail(function(jXHR) {
             if (jXHR != undefined)
                 if (jXHR.status == 409)
                     document.getElementById('resposta').innerHTML = '<strong style="color: red;">O e-mail já esta cadastrado</strong>'
@@ -58,8 +59,7 @@ $(function () {
             (dominio.indexOf(".") >= 1) &&
             (dominio.lastIndexOf(".") < dominio.length - 1)) {
             return true
-        }
-        else {
+        } else {
             return false
         }
     }
