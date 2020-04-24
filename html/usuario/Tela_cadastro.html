@@ -9,11 +9,12 @@
 </head>
 
 <body>
-    
+
     <header>
 
         <div class="logo">
-            <img src="../../Imagens/logo.png" width="80">
+            <img src="C:\Users\Tamires Cruz\Documents\Desenvolvimento de Projetos\Projeto_System_Call\System_call\public\img/logo_fundo_branco_SC.jpg"
+                width="70">
         </div>
 
         <div class="center">
@@ -114,28 +115,28 @@
                 return
             }
 
-                $.ajax({
-                    type: 'post',
-                    url: 'https://softrec.com.br/usuario/',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        nome: nome,
-                        email: email,
-                        senha: senha,
-                        tipo: tipo,
-                        setor: setor
-                    }),
-                    dataType: 'json'
-                }).then(function (data) {
-                    document.getElementById('resposta').innerHTML = '<strong style="color: green;">Cadastro realizado com sucesso!</strong>'
-                    document.getElementById('nome').value = ''
-                    document.getElementById('e-mail').value = ''
-                    document.getElementById('senha').value = ''
-                }).always(function (jXHR) {
-                    if (jXHR != undefined)
-                        if (jXHR.status == 409)
-                            document.getElementById('resposta').innerHTML = '<strong style="color: red;">O e-mail já esta cadastrado</strong>'
-                })
+            $.ajax({
+                type: 'post',
+                url: 'https://softrec.com.br/usuario/',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    nome: nome,
+                    email: email,
+                    senha: senha,
+                    tipo: tipo,
+                    setor: setor
+                }),
+                dataType: 'json'
+            }).then(function (data) {
+                document.getElementById('resposta').innerHTML = '<strong style="color: green;">Cadastro realizado com sucesso!</strong>'
+                document.getElementById('nome').value = ''
+                document.getElementById('e-mail').value = ''
+                document.getElementById('senha').value = ''
+            }).always(function (jXHR) {
+                if (jXHR != undefined)
+                    if (jXHR.status == 409)
+                        document.getElementById('resposta').innerHTML = '<strong style="color: red;">O e-mail já esta cadastrado</strong>'
+            })
 
 
         })
@@ -153,7 +154,7 @@
                 (dominio.search(".") != -1) &&
                 (dominio.indexOf(".") >= 1) &&
                 (dominio.lastIndexOf(".") < dominio.length - 1)) {
-               return true
+                return true
             }
             else {
                 return false

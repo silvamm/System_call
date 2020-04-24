@@ -18,7 +18,7 @@
 
         .logo{
             position: absolute;
-            width: 90px;
+            width: 80px;
             top: 0px;  
             bottom: 0px;
             left: 0px;
@@ -97,4 +97,16 @@
             text-align: center;
             color: white;
             background: #069;
+        }
+        .editar{
+            
+            color: #069;
+        }
+        .excluir{
+            color: #069;
+        }
+        .add{
+        background: #069;
+        color: #f8f8f8;
+        float: right;
         }
