@@ -18,10 +18,11 @@
 
         .logo{
             position: absolute;
-            width: 90px;
+            width: 80px;
             top: 0px;  
             bottom: 0px;
             left: 0px;
+            right: 1px;
   
         } /* configuração da logo-marca no topo do site*/
 
@@ -97,4 +98,14 @@
             text-align: center;
             color: white;
             background: #069;
+        }
+        .editar{
+            
+            color: #069;
+        }
+        .excluir{
+            color: #069;
+        }
+        fieldset.button{
+        
         }
