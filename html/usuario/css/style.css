@@ -22,7 +22,6 @@
             top: 0px;  
             bottom: 0px;
             left: 0px;
-            right: 1px;
   
         } /* configuração da logo-marca no topo do site*/
 
@@ -106,6 +105,8 @@
         .excluir{
             color: #069;
         }
-        fieldset.button{
-        
+        .add{
+        background: #069;
+        color: #f8f8f8;
+        float: right;
         }
