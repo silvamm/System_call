@@ -20,14 +20,17 @@
 
         <nav>
             <ul>
+                {{#if session.admin}}
                 <li><a href="/usuario">Usuários</a></li>
                 <li><a href="/setor">Setores</a></li>
+                <li><a href="/predefinido">Predefinição</a></li>
+                {{/if}}
                 <li><a href="/chamado">Chamados</a></li>
                 <li><a href="/logout">Sair</a></li>
             </ul>
         </nav>
     </header>
-    
+
     {{{ body }}}
 
     <footer>
