@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+    <html lang="pt-br">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>System Call</title>
+        <style type="text/css">
+            html, body{padding: 0; margin-bottom: 11px ; margin-left: auto; margin-right: auto; height: 100%;}
+            body {min-height: 100%;}
+            html body{height: 100%;}
+            body{position: relative;} /* do html.css ate aqui é uma parte da configuração do rodape*/
+
+            header{
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            padding: 9px 0;
+            text-align: center;
+            background: #069;    
+            } /* configuração do background do topo do site e centralização do texto*/
+
+            .logo{
+            position: absolute;
+            width: 90px;
+            top: 0px;  
+            bottom: 0px;
+            left: 0px;} /* configuração da logo-marca no topo do site*/    
+      
+            header li{
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 20px;} /* configurações para posicionar o texto no topo do site*/       
+            
+            header a{
+            text-decoration: none;
+            color:white;
+            opacity: 0.8;  } /* configuração de cor do texto do topo do site*/
+       
+            a:hover{
+            opacity: 1;
+            color:black;}
+           
+            .Form{
+            margin-top: 10%;
+            margin-left: 140px;}
+          
+            .busc{
+            margin-left: 320px;}
+          	
+            td{
+            padding: 20px 40px;
+            background: #ccc 1px;} 
+          
+            .topo{
+            background: #069;
+            color: white;
+            padding: 20px 40px;}  
+          
+            table{
+            margin-top: 50px;
+            text-align: center;
+            border:1px solid #ccc;
+            background: #f8f8f8;
+            box-sizing: border-box;}
+
+            .rodape{
+            text-align: center; font-size: 14px;
+            width: 100%;
+            padding: 9px 0;
+            text-align: center;
+            color: white;
+            background: #069;            
+            position: absolute;
+            bottom: 0; } /* configuração de cor e posicionamento do rodape*/
+        </style>
+        </head>
+        <body>
+            <header> 
+                <div class="logo">
+                  <img src="../logo/Logo.png" width="80">
+                </div>
+                <nav>
+                  <ul>
+                    <li><a href="Tela_solicitacaodechamado.html">Inicio</a></li>
+                    <li><a href="../usuario/Tela_cadastro.html">Cadastrar Usuário</a></li>
+                    <li><a href="../setor/Tela_cadastro_setor.html">Cadastrar Setor</a></li>
+                    <li><a href="../chamados/Tela_aberturadechamado.html">Abrir chamado</a></li>
+                    <li><a href="Tela_solicitacaodechamado.html">Voltar</a></li> 
+                    <li><a href="../login/Tela_login.html">Sair</a></li>  
+                  </ul>
+                </nav>
+                
+                     
+                   
+              </header>     
+            </div>
+            
+            <div><h1>Detalhes Referentes ao sChamado: </h1> </div>
+
+            <table align="center">
+                <tr class="topo"> 
+                    <th>+</th>
+                    <td>Data:</td>
+                    <td>Referencia/Codigo:</td>
+                    <td>Sumário:</td>
+                    <td>Tipo de Chamado:</td>
+                    <td>Estado:</td>    
+                    <td>Solicitador(e-mail):</td>
+                    <td>Detalhes:</td>
+                </tr>  
+
+                <tr class="topo"> 
+                    <th>+</th>
+                    <td>30/02/2020</td>
+                    <td>Alp09032020002</td>
+                    <td>Software</td>
+                    <td>Instalação</td>
+                    <td>Concluido</td>
+                    <td>marcos.alves@alpha.rec.br</td>
+                    <td>Solicito instalação do eclipse nas maquinas do laboratorio.</td>
+                </tr>
+            </table>    
+            <div class="rodape"> Elaborado pela equipe do projeto System Call - 2020</div>
+        </body>
+</html>
