@@ -1,195 +1,74 @@
-    <!DOCTYPE html>
-    <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>System Call</title>
-        <style type="text/css">
+<!DOCTYPE html>
+<html lang="pt-br">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Call</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
 
+<body>
 
+    <header>
 
-            .Form{
-                left: 52%; 
-                margin: -130px 0 0 -210px; 
-                padding:10px;
-                position: absolute; 
-                top: 40%;
-            }/*configuração para centralizar o formulario*/
+        <div class="logo">
+            <img src="../Imagens/logo.png" width="80">
 
-            form div + div {
-                margin-top: 1em;
-            }/* espaçamento de uma div para outra*/
+        </div>
 
-            fieldset{
-            
-            width: 400px;
-            text-align: center;
-            margin:0 auto;
-            border:1px solid #ccc;
-            border-radius: 1em;
-            background: #f8f8f8;
-            }/* cinfiguração dos textos e borda do formulario*/
-
-            fieldset legend{
-            text-align: center;
-            font-size: 22px;
-            font-weight: bold;
-            } /* Fieldset para configurar a palavra cadastro no topo do formulario */
-
-            label{
-            display:block;
-            cursor: pointer;
-            }
-
-            textarea {
-
-            width: 380px;
-            height: 150px;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-            border: 1px solid #999;
-            } /* configuração da caixa de texto "descrição"*/
-
-            
-            header{
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            padding: 9px 0;
-            text-align: center;
-            background: #069;
-            } /* configuração do background do topo do site e centralização do texto*/
-
-            .logo{
-            position: absolute;
-            width: 90px;
-            top: 0px;  
-            bottom: 0px;
-            left: 0px;
-  
-            } /* configuração da logo-marca no topo do site*/
-
-            header li{
-
-            display: inline-block;
-            margin: 0 10px;
-            font-size: 20px;
-            } /* configurações para posicionar o texto no topo do site*/
-
-            header li{
-
-            display: inline-block;
-            margin: 0 10px;
-            font-size: 20px;
-            } /* configurações para posicionar o texto no topo do site*/
-
-            header a{
-            text-decoration: none;
-            color:white;
-            opacity: 0.8;
-
-            } /* configuração de cor do texto do topo do site*/
-
-            a:hover{
-            opacity: 1;
-            color:black;
-
-            } /* Efeito dos botões*/
-
-
-            .arq{
-                text-align: left;
-            }
-        
-            input[type=submit]{
-
-                display: block;
-                background-color: #ccc;
-                height: 30px;
-                border: none;
-                outline: 0;
-                cursor: pointer;
-                width: 100px;
-                margin: 0 auto;
-                text-align: center;
-                border-radius: 13px;
-            }/*configuração e efeitos do botão enviar */
-            
-            .rodape{
-
-                margin-top: 43%;
-                text-align: center; font-size: 14px;
-                width: 100%;
-                padding: 9px 0;
-                text-align: center;
-                color: white;
-                background: #069;
-            }/*configuração do rodape da pagina*/
-                    
-        </style>
-    </head>
-    <body>
-
-        <header>
-       
-            <div class="logo">
-                        <img src="../Imagens/logo.png" width="80">
-                        
-            </div>
-        
-            <div class="center">
+        <div class="center">
             <nav>
                 <ul>
-                  
-                  <li><a href="Tela_status.html">Status dos Chamados</a></li>
-                  <li><a href="Tela_login.html">Sair</a></li>
-                  
+
+                    <li><a href="Tela_status.html">Status dos Chamados</a></li>
+                    <li><a href="Tela_login.html">Sair</a></li>
+
                 </ul>
             </nav>
-            </div>
-        </header>
-        
-        <div class="Form">
-            <form action="Tela_status.html" method="POST">
-                
-                <fieldset>
+        </div>
+    </header>
+
+    <div class="Form">
+        <form action="Tela_status.html" method="POST">
+
+            <fieldset>
 
                 <legend>Abertura de Chamado</legend>
-                
+
                 <div class="chamados">
                     <label for="tipo">Tipos de Chamados:</label>
-                    
+
                     <select class="tipos" id="tipo">
-                    <option value="PW">Problemas com a Rede WIFI</option>
-                    <option value="Ip">Instalação de programas</option>
-                    <option value="Ar">Arcondicionado</option>
-                    <option value="Ou">Outros</option>
+                        <option value="PW">Problemas com a Rede WIFI</option>
+                        <option value="Ip">Instalação de programas</option>
+                        <option value="Ar">Arcondicionado</option>
+                        <option value="Ou">Outros</option>
                     </select><br>
                 </div>
 
                 <div class="desc">
-                <label for="descricao">Descrição:</label>
+                    <label for="descricao">Descrição:</label>
                     <textarea name="descricao" placeholder="Detalhe aqui" id="descricao">
                     </textarea>
-                    
-                        <!--<input type="text" name="descricao" id="descricao"> -->
-                    </div>
 
-              <div class="arq">
-              <label for="imagem">Anexar Imagem:</label>
-                <input type="file" name="Arquivo">
+                    <!--<input type="text" name="descricao" id="descricao"> -->
+                </div>
+
+                <div class="arq">
+                    <label for="imagem">Anexar Imagem:</label>
+                    <input type="file" name="Arquivo">
                 </div>
                 <input type="submit" value="Enviar">
             </fieldset>
-            </form>
-        </div>
+        </form>
+    </div>
 
-        <div class="rodape"> Elaborado pela equipe do projeto System Call - 2020</div>
-    
-
+    <div class="rodape"> Elaborado pela equipe do projeto System Call - 2020</div>
 
 
-    </body>
-    </html>
+
+
+</body>
+
+</html>
