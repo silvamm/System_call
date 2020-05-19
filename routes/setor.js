@@ -2,9 +2,9 @@ const express = require('express')
 const router = express.Router()
 const superagent = require('superagent')
 
-router.get('/', (req, res) => res.render('setor/index'))
+router.get('/', global.auth(), (req, res) => res.render('setor/index'))
 
-router.post('/', (req, res) => {
+router.post('/', global.auth(), (req, res) => {
     superagent
         .post('https://softrec.com.br/setor/')
         .send(req.body)

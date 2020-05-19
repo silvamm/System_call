@@ -5,6 +5,7 @@ const path = require('path')
 const session = require('express-session')
 const redis = require('redis')
 
+//porta
 const port = 3000
 app.listen(port, () => console.log(`Funcionando | Porta : ${port}`))
 
@@ -18,6 +19,7 @@ let redisClient = redis.createClient()
 
 redisClient.on('error', err => console.log('Redis error: ', err))
 
+//session com Redis
 app.use(
     session({
         store: new RedisStore({ client: redisClient }),
@@ -27,11 +29,16 @@ app.use(
     })
 )
 
+app.use(function(req, res, next) {
+    res.locals.session = req.session;
+    next();
+});
+
 //autenticacao
 global.auth = () => {
     return function(req, res, next) {
         if (!req.session || !req.session.email)
-            res.redirect('/login')
+            return res.redirect('/login')
         next()
     }
 }
@@ -52,11 +59,6 @@ app.engine('hbs',
         extname: 'hbs'
     })
 )
-
-app.use(function(req, res, next) {
-    res.locals.session = req.session;
-    next();
-});
 
 //pasta de arquivos estaticos
 app.use(express.static(path.join(__dirname, 'public')))

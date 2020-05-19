@@ -2,53 +2,68 @@
 <link rel="stylesheet" href="/usuario/css/style.css">
 {{/section}}
 
-<form action="#" id="form" >
+<style>
+         table{
+            margin-top: 50px;
+            text-align: center;
+            border:1px solid #ccc;
+            background: #f8f8f8;
+            box-sizing: border-box;
+        }
+        th{
+            background: #069;
+            color: white;
+        }
 
-    <fieldset>
+        td{
+            padding: 20px 40px;
+            background: #ccc 1px;
+        }
+         .editar{
+            
+            color: #069;
+        }
+        .excluir{
+            color: #069;
+        }
+        .add{       
+        color: #069;
+        float: right;
+        }
+</style>
 
-        <legend>Cadastrar Usuário</legend>
+    <form>
 
-        <div id="resposta"></div>
-
-        <div>
-            <label for="nome">Nome:</label>
-            <input type="text" name="name" id="nome">
-        </div>
-
-        <div>
-            <label for="tipo">Tipo de Usuário:</label>
-            <select id="tipo">
-                <option value="0">COMUM</option>
-                <option value="1">ADMINISTRADOR</option>
-            </select>
-        </div>
-        <div>
-            <label for="setor">Setor:</label>
-            <select id="setor">
-                {{#each setores}}
-                    <option value={{id}}>{{nome}}</option>
+        <fieldset>
+            <button id="add" class="add" type="button" value="add" >+ add novo</button>
+            <legend>Lista de Usuários</legend>
+            <table border="1">
+                <tr>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Setor</th>
+                    <th>E-mail</th>
+                    <th colspan="2">Modificar</th>
+                </tr>
+                {{#each usuarios}}
+                <tr>
+                    <td>{{nome}}</td>
+                    <td>{{tipo}}</td>
+                    <td>{{setor.nome}}</td>
+                    <td>{{email}}</td>
+                    <td><a type="button" class="editar" value="Editar"  href='/usuario/{{id}}'>Editar</a></td>
+                    <td><button type="button" class="excluir" value="Excluir" onclick='excluir(this, {{id}})'>Excluir</button></td>
+                </tr>
                 {{/each}}
-            </select>
-        </div>
-        <div>
-            <label for="e-mail">Endereço de e-mail:</label>
-            <input type="text" name="email" id="email">
-        </div>
-        <div>
-            <label for="senha">Digite a senha:</label>
-            <input type="password" value="password" name="password" id="senha">
-        </div>
+
+            </table>
+
+        </fieldset>
 
 
-        <div class="button">
-            <button type="submit">Cadastrar</button>
-        </div>
-
-    </fieldset>
-
-</form>
+    </form>
 
 
 {{#section 'js'}}
-<script src="/usuario/js/script.js"></script>
+<script src="/usuario/js/index.js"></script>
 {{/section}}

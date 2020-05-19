@@ -1,0 +1,44 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="/usuario/css/style.css">
+{{/section}}
+
+<form action="#" id="form">
+    <fieldset>
+        <legend>Cadastrar Usuário</legend>
+        <div id="resposta"></div>
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" name="name" id="nome">
+        </div>
+        <div>
+            <label for="tipo">Tipo de Usuário:</label>
+            <select id="tipo">
+                <option value="0">COMUM</option>
+                <option value="1">ADMINISTRADOR</option>
+            </select>
+        </div>
+        <div>
+            <label for="setor">Setor:</label>
+            <select id="setor">
+                {{#each setores}}
+                <option value={{id}}>{{nome}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div>
+            <label for="e-mail">Endereço de e-mail:</label>
+            <input type="text" name="email" id="email">
+        </div>
+        <div>
+            <label for="senha">Digite a senha:</label>
+            <input type="password" value="password" name="password" id="senha">
+        </div>
+        <div class="button">
+            <button type="submit">Cadastrar</button>
+        </div>
+    </fieldset>
+</form>
+
+{{#section 'js'}}
+<script src="/usuario/js/formulario.js"></script>
+{{/section}}

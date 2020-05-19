@@ -9,7 +9,7 @@ router.post('/', (req, res) => {
         .post('https://softrec.com.br/login/')
         .send(req.body)
         .end((error, result) => {
-            if (error) res.sendStatus(error.status)
+            if (error) return res.sendStatus(error.status)
 
             req.session.nome = result.body.nome
             req.session.email = result.body.email
