@@ -60,6 +60,11 @@ app.engine('hbs',
     })
 )
 
+app.use(function(req, res, next) {
+    res.locals.session = req.session;
+    next();
+});
+
 //pasta de arquivos estaticos
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'views')))
