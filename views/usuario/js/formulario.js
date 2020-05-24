@@ -2,6 +2,7 @@ $(function() {
 
     document.getElementById('form').addEventListener('submit', function(e) {
         e.preventDefault()
+        var id = document.getElementById('id').value
         var nome = document.getElementById('nome').value.trim()
         var email = document.getElementById('email').value.trim()
         var senha = document.getElementById('senha').value
@@ -10,7 +11,7 @@ $(function() {
             id: document.getElementById('setor').value
         }
 
-        if (nome == '' || email == '' || senha == '') {
+        if ((nome == '' || email == '') || (!id && senha == '')) {
             document.getElementById('resposta').innerHTML = '<strong style="color: red;">Preencha todos os campos</strong>'
             return
         }
@@ -25,6 +26,7 @@ $(function() {
             url: '/usuario/',
             contentType: 'application/json',
             data: JSON.stringify({
+                id: id,
                 nome: nome,
                 email: email,
                 senha: senha,
@@ -32,10 +34,14 @@ $(function() {
                 setor: setor
             })
         }).done(function() {
-            document.getElementById('resposta').innerHTML = '<strong style="color: green;">Cadastro realizado com sucesso!</strong>'
-            document.getElementById('nome').value = ''
-            document.getElementById('email').value = ''
-            document.getElementById('senha').value = ''
+            if (id) {
+                document.getElementById('resposta').innerHTML = '<strong style="color: green;">Cadastro atualizado com sucesso!</strong>'
+            } else {
+                document.getElementById('resposta').innerHTML = '<strong style="color: green;">Cadastro realizado com sucesso!</strong>'
+                document.getElementById('nome').value = ''
+                document.getElementById('email').value = ''
+                document.getElementById('senha').value = ''
+            }
             setTimeout(() => document.getElementById('resposta').innerHTML = '', 3000);
         }).fail(function(jXHR) {
             if (jXHR != undefined)

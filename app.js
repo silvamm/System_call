@@ -1,9 +1,10 @@
-const express = require('express')
-const hbs = require('express-handlebars')
-const app = express()
-const path = require('path')
-const session = require('express-session')
-const redis = require('redis')
+const
+    express = require('express'),
+    hbs = require('express-handlebars'),
+    app = express(),
+    path = require('path'),
+    session = require('express-session'),
+    redis = require('redis')
 
 //porta
 const port = 3000
@@ -54,6 +55,9 @@ app.engine('hbs',
                 if (!this.section) this.section = {}
                 this.section[name] = options.fn(this)
                 return;
+            },
+            selected: function(value, options) {
+                return options.fn()
             }
         },
         extname: 'hbs'
@@ -68,6 +72,7 @@ app.use(function(req, res, next) {
 //pasta de arquivos estaticos
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'views')))
+
 
 //rotas
 app.get('/', (req, res) => res.redirect('/login'))

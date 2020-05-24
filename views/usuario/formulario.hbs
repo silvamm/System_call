@@ -4,17 +4,18 @@
 
 <form action="#" id="form">
     <fieldset>
+        <input type="hidden" id="id" value="{{usuario.id}}"/>
         <legend>Cadastrar Usuário</legend>
         <div id="resposta"></div>
         <div>
             <label for="nome">Nome:</label>
-            <input type="text" name="name" id="nome">
+            <input type="text" name="name" id="nome" value="{{usuario.nome}}">
         </div>
         <div>
             <label for="tipo">Tipo de Usuário:</label>
             <select id="tipo">
-                <option value="0">COMUM</option>
-                <option value="1">ADMINISTRADOR</option>
+                <option value="0" >COMUM</option>
+                <option value="1" selected>ADMINISTRADOR</option>
             </select>
         </div>
         <div>
@@ -27,11 +28,14 @@
         </div>
         <div>
             <label for="e-mail">Endereço de e-mail:</label>
-            <input type="text" name="email" id="email">
+            <input type="text" name="email" id="email" value="{{usuario.email}}">
         </div>
         <div>
             <label for="senha">Digite a senha:</label>
-            <input type="password" value="password" name="password" id="senha">
+            <input type="password" name="password" id="senha" 
+            {{#if usuario.id}}
+                placeholder="Deixe em branco para manter a senha atual" 
+            {{/if}}>
         </div>
         <div class="button">
             <button type="submit">Cadastrar</button>
