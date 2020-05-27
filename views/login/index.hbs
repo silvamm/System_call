@@ -1,35 +1,25 @@
 {{#section 'css'}}
-<link rel="stylesheet" type="text/css" href="/login/css/style.css">
 {{/section}}
 
-<div align="center" class="logo">
-    <img src="/img/logo.png" width="180">
+<div class="container">
+
+    <form id="form" class="form-signin">
+        <div align="center" class="logo">
+            <img class="img-fluid" src="/img/logo3.png" width="250">
+        </div>
+        <div class="login-wrap">
+            <div class="text-center my-2" id="resposta"></div>
+            <input type="text" id="login" class="form-control" placeholder="E-mail" autofocus>
+            <input type="password" id="password" class="form-control" placeholder="Senha">
+            <br />
+            <button class="btn btn-lg btn-login btn-block" id="btnSubmit" type="submit">Entrar</button>
+
+        </div>
+    </form>
+
 </div>
 
-<form id="form">
-    <h3 align="center">Bem vindo a sua rede de Chamados</h3>
 
-    <fieldset>
-        <!-- Fieldset são utilizados para agrupar dados semelhantes-->
-        <div id="resposta"></div>
-
-        <legend>Faça o Login</legend>
-        <div>
-            <label for="login">Login:</label>
-            <!-- Label quer dizer etiqueta ou rotulo serve pra identificar as caixas de texto, onde mais importante vai ser o id="nome" onde irá definir dentro do label com o atributo for="nome" que utiliza o mesmo valor definido no id, que assim o <label> será associado ao <input> a 2º maneira é envolver o <label> ao <input> </label> nesse caso npode ser até removido o for="..." -->
-            <input type="text" id="login" >
-        </div>
-        <div>
-            <label for="password">Senha:</label>
-            <input type="password" id="password">
-        </div>
-
-        <div class="button">
-            <button type="submit" id="btnSubmit" >Entrar</button>
-        </div>
-
-    </fieldset>
-</form>
 
 {{#section 'js'}}
 <script src="/login/js/script.js"></script> 

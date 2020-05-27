@@ -56,8 +56,13 @@ app.engine('hbs',
                 this.section[name] = options.fn(this)
                 return;
             },
-            selected: function(value, options) {
-                return options.fn()
+            selected: function(selected, options) {
+                return options.fn(this).replace(
+                    new RegExp(' value=\"' + selected + '\"'),
+                    '$& selected="selected"');
+            },
+            selected: function(key, value) {
+                return key == value ? ' selected' : '';
             }
         },
         extname: 'hbs'

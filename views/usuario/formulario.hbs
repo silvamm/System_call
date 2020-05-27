@@ -1,47 +1,53 @@
 {{#section 'css'}}
 <link rel="stylesheet" href="/usuario/css/style.css">
 {{/section}}
+<section class="card">
+    <div class="card-header">Salvar Usuário</div>
+    <div class="card-body">
 
-<form action="#" id="form">
-    <fieldset>
-        <input type="hidden" id="id" value="{{usuario.id}}"/>
-        <legend>Cadastrar Usuário</legend>
-        <div id="resposta"></div>
-        <div>
-            <label for="nome">Nome:</label>
-            <input type="text" name="name" id="nome" value="{{usuario.nome}}">
-        </div>
-        <div>
-            <label for="tipo">Tipo de Usuário:</label>
-            <select id="tipo">
-                <option value="0" >COMUM</option>
-                <option value="1" selected>ADMINISTRADOR</option>
-            </select>
-        </div>
-        <div>
-            <label for="setor">Setor:</label>
-            <select id="setor">
-                {{#each setores}}
-                <option value={{id}}>{{nome}}</option>
-                {{/each}}
-            </select>
-        </div>
-        <div>
-            <label for="e-mail">Endereço de e-mail:</label>
-            <input type="text" name="email" id="email" value="{{usuario.email}}">
-        </div>
-        <div>
-            <label for="senha">Digite a senha:</label>
-            <input type="password" name="password" id="senha" 
-            {{#if usuario.id}}
-                placeholder="Deixe em branco para manter a senha atual" 
-            {{/if}}>
-        </div>
-        <div class="button">
-            <button type="submit">Cadastrar</button>
-        </div>
-    </fieldset>
-</form>
+        <form class="" action="#" id="form">
+
+            <input type="hidden" id="id" value="{{usuario.id}}" />
+
+            <div class="mb-2" id="resposta"></div>
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input class="form-control" type="text" name="name" id="nome" value="{{usuario.nome}}">
+            </div>
+            <div class="form-group">
+                <label for="tipo">Tipo de Usuário:{{usuario.tipo}}</label>
+                <select class="form-control" id="tipo">
+                    <option value="0" {{selected COMUM ../usuario.tipo}}>COMUM</option>
+                    <option value="1" {{selected ADMINISTRADOR ../usuario.tipo}}>ADMINISTRADOR</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="setor">Setor:</label>
+                <select class="form-control" id="setor">
+
+                    {{#each setores}}
+                    <option value={{id}} {{selected id ../usuario.setor.id}}>{{nome}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="e-mail">Endereço de e-mail:</label>
+                <input class="form-control" type="text" name="email" id="email" value="{{usuario.email}}">
+            </div>
+            <div class="form-group">
+                <label for="senha">Digite a senha:</label>
+                <input class="form-control" type="password" name="password" id="senha" {{#if usuario.id}}
+                    placeholder="Deixe em branco para manter a senha atual" {{/if}}>
+            </div>
+            <div class="float-right">
+                <a type="submit" class="btn btn-danger" href="/usuario/lista">Voltar</a>
+                <button type="submit" class="btn btn-success">Cadastrar</button>
+            </div>
+
+        </form>
+    </div>
+</section>
 
 {{#section 'js'}}
 <script src="/usuario/js/formulario.js"></script>
