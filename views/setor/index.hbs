@@ -1,22 +1,88 @@
 {{#section 'css'}}
-<link rel="stylesheet" href="/setor/css/style.css">
 {{/section}}
 
-<form action="#" id="form">
-    <fieldset>
-        <legend>Cadastrar Setor</legend>
-        <div id="resposta"></div>
+<section class="card">
+    <div class="card-header">Filtros</div>
+    <div class="card-body">
 
-        <div>
-            <label for="tipo">Nome:</label>
-            <input type="text" name="nome" id="nome">
+        <div class="row">
+
+            <div class="col">
+                <input class="form-control" type="search" value="" placeholder="Nome" name="Buscar">
+            </div>
+            <div class="col">
+                <select class="form-control">
+                    <option value="10">10 Registros</option>
+                    <option value="20">20 Registros</option>
+                    <option value="30">30 Registros</option>
+                    <option value="50">50 Registros</option>
+                    <option value="100">100 Registros</option>
+                </select>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+            </div>
         </div>
-        <div class="button">
-            <button type="submit">Cadastrar</button>
-        </div>
-    </fieldset>
-</form>
+    </div>
+</section>
+
+<section class="card">
+    <div class="card-header">
+        Setores
+    </div>
+    <div class="card-body">
+        <a class="btn btn-primary float-right" href="/setor"><i class="fa fa-plus"></i> Adicionar</a>
+
+        <table class="table table-bordered table-hover my-5">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each setores}}
+                <tr>
+                    <td>{{nome}}</td>
+                    <td><a type="button" class="btn btn-primary " value="Editar" href='/setor/{{id}}'><i
+                                class="fa fa-pencil"></i> Editar</a>
+                        <button type="button" class="btn btn-danger" value="Excluir" onclick='excluir(this, {{id}})'><i
+                                class="fa fa-trash-o"></i> Excluir</button></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</section>
+
 
 {{#section 'js'}}
-<script src="/setor/js/script.js"></script>
+<script>
+    $(function () {
+        document
+            .getElementById('add')
+            .addEventListener('click', function () {
+                window.location = '/setor'
+            })
+
+    })
+
+    function excluir(item, id) {
+        if (confirm("Deseja realmente excluir o registro ? ")) {
+            $.ajax({
+                type: 'delete',
+                url: '/setor/' + id
+            }).done(function () {
+                let tr = $(item).closest('tr')
+                tr.fadeOut(500, () => tr.remove())
+            }).fail(function (jXHR) {
+                console.log('Aconteceu um erro')
+            })
+        }
+    }
+
+    function editar(id) {
+        window.location = '/setor/' + Number(id)
+    }
+</script>
 {{/section}}

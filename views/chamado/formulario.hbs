@@ -1,12 +1,12 @@
 {{#section 'css'}}
 {{/section}}
+
 <section class="card">
-    <div class="card-header">Salvar Usuário</div>
+    <div class="card-header">Salvar Chamado</div>
     <div class="card-body">
         <form class="" action="/usuario/" method="post" id="form">
-            <input type="hidden" id="id" name="id" value="{{usuario.id}}" />
+            <input type="hidden" id="id" name="id" value="{{chamado.id}}" />
 
-            <div class="mb-2" id="resposta"></div>
             <div class="form-group">
                 <label for="nome">Nome:</label>
                 <input class="form-control" type="text" name="nome" id="nome" value="{{usuario.nome}}">
@@ -55,6 +55,6 @@
     </div>
 </section>
 
+
 {{#section 'js'}}
-<script src="/usuario/js/formulario.js"></script>
 {{/section}}

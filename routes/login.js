@@ -1,12 +1,14 @@
-const express = require('express')
-const router = express.Router()
-const superagent = require('superagent')
+const
+    express = require('express'),
+    router = express.Router(),
+    superagent = require('superagent')
+
 
 router.get('/', (req, res) => res.render('login/index', { layout: 'login' }))
 
 router.post('/', (req, res) => {
     superagent
-        .post('https://softrec.com.br/login/')
+        .post(global.url + '/login/')
         .send(req.body)
         .end((error, result) => {
             if (error) return res.sendStatus(error.status)

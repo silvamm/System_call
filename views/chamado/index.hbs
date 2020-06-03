@@ -1,5 +1,4 @@
 {{#section 'css'}}
-<link rel="stylesheet" href="/principal/css/style.css">
 {{/section}}
 
 <section class="card">
@@ -47,37 +46,45 @@
 </section>
 
 <section class="card">
-  <div class="card-header">Chamados</div>
+  <div class="card-header">
+    {{#ifnot session.admin}}Meus {{/ifnot}}Chamados</div>
   <div class="card-body">
 
-    <table class="table table-striped table-advance table-hover">
+    {{#ifnot session.admin}}
+     <a class="btn btn-primary float-right" href="/chamado"><i class="fa fa-plus"></i> Abrir chamado</a>
+    {{/ifnot}}
+
+    <table class="table table-bordered table-hover my-5">
       <thead>
         <tr>
-          <th><i class="fa fa-bullhorn"></i>Protocolo</th>
-          <th class="hidden-phone"><i class="fa fa-question-circle"></i> Descrição</th>
-          <th><i class="fa fa-bookmark"></i> Setor</th>
-          <th><i class=" fa fa-edit"></i> Situação</th>
-          <th></th>
+          <th>Protocolo</th>
+          <th>Descrição</th>
+          <th>Setor</th>
+          <th>Situação</th>
+          <th>Ações</th>
         </tr>
       </thead>
-      <tbody>
+     <tbody>
         <tr>
           <td><a href="#">Vector Ltd</a></td>
           <td class="hidden-phone">Lorem Ipsum dorolo imit</td>
           <td>12120.00$ </td>
           <td><span class="badge badge-info label-mini">Due</span></td>
           <td>
+            {{#if session.admin}}
             <button title="Aceitar" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Aceitar</button>
+            {{/if}}
             <button class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Detalhes</button>
+            {{#if session.admin}}
             <button class="btn btn-danger btn-sm"><i class="fa fa-times "></i> Encerrar</button>
+            {{/if}}
           </td>
         </tr>
-
-      </tbody>
+  </tbody>
+      
     </table>
   </div>
 </section>
 
 {{#section 'js'}}
-<script src="/principal/js/script.js"></script>
 {{/section}}

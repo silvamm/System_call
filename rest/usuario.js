@@ -1,24 +1,30 @@
 const
     superagent = require('superagent')
 
+
 class UsuarioRest {
+
+    list() {
+        return superagent
+            .get(global.url + '/usuario/')
+    }
 
     get(id) {
         return superagent
-            .get('https://softrec.com.br/usuario/' + id)
+            .get(global.url + '/usuario/' + id)
     }
 
     put(usuario) {
         return superagent
-            .put('https://softrec.com.br/usuario/' + usuario.id)
+            .put(global.url + '/usuario/' + usuario.id)
             .send(usuario)
     }
 
     post(usuario) {
         return superagent
-            .post('https://softrec.com.br/usuario/')
+            .post(global.url + '/usuario/')
             .send(usuario)
     }
 }
 
-module.exports = UsuarioRest
+module.exports = new UsuarioRest()

@@ -4,11 +4,16 @@ const
     app = express(),
     path = require('path'),
     session = require('express-session'),
-    redis = require('redis')
+    redis = require('redis'),
+    nconf = require('nconf')
 
 //porta
 const port = 3000
 app.listen(port, () => console.log(`Funcionando | Porta : ${port}`))
+
+//nconf
+nconf.argv().env().file({ file: './config.json' });
+global.url = nconf.get('url')
 
 //config recebendo dados do cliente
 app.use(express.urlencoded({ extended: true }))
@@ -56,13 +61,12 @@ app.engine('hbs',
                 this.section[name] = options.fn(this)
                 return;
             },
-            selected: function(selected, options) {
-                return options.fn(this).replace(
-                    new RegExp(' value=\"' + selected + '\"'),
-                    '$& selected="selected"');
-            },
             selected: function(key, value) {
-                return key == value ? ' selected' : '';
+                return key === value ? ' selected' : '';
+            },
+            ifnot: function(conditional, options) {
+                if (!conditional)
+                    return options.fn(this)
             }
         },
         extname: 'hbs'
@@ -83,6 +87,6 @@ app.use(express.static(path.join(__dirname, 'views')))
 app.get('/', (req, res) => res.redirect('/login'))
 app.use('/login', require('./routes/login'))
 app.use('/logout', require('./routes/logout'))
-app.use('/principal', require('./routes/principal'))
+app.use('/principal', require('./routes/chamado'))
 app.use('/usuario', require('./routes/usuario'))
 app.use('/setor', require('./routes/setor'))

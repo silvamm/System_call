@@ -1,0 +1,42 @@
+{{#section 'css'}}
+{{/section}}
+
+{{#if success}}
+<div class="alert alert-success" role="alert" style="text-align: justify;">
+    <h4>
+        <i class="fa fa-ok-sign"></i>
+        Concluído!
+    </h4>
+    <p>
+        {{#if mensagem}}
+            {{mensagem}}
+        {{else}}
+            Operação realizada com sucesso!
+        {{/if}}
+    </p>
+</div>
+{{else}}
+<div class="alert alert-danger" role="alert" style="text-align: justify;">
+    <h4>
+        <i class="fa fa-ok-sign"></i>
+        Falha!
+    </h4>
+    <p>
+        {{#if mensagem}}
+            {{mensagem}}
+        {{else}}
+             Tivemos um problema ao realizar a operação. Por favor, tente novamente dentro de alguns minutos.
+        {{/if}}
+    </p>
+</div>
+{{/if}}
+
+{{#if redirect}}
+<a class="btn btn-primary" style="float: right" href="{{redirect}}">Voltar</a>
+{{else}}
+<a class="btn btn-primary" style="float: right" href="javascript:history.back();">Voltar</a>
+{{/if}}
+
+
+{{#section 'js'}}
+{{/section}}
