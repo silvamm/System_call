@@ -2,18 +2,18 @@
 {{/section}}
 
 <section class="card">
-    <div class="card-header">Salvar Setor</div>
+    <div class="card-header">Salvar Predefinição</div>
     <div class="card-body">
-        <form class="" action="/setor/" method="post" id="form">
-            <input type="hidden" id="id" name="id" value="{{setor.id}}" />
+        <form class="" action="/predefinicao/" method="post" id="form">
+            <input type="hidden" name="id" value="{{predefinicao.id}}" />
 
             <div class="form-group">
                 <label for="nome">Nome:</label>
-                <input class="form-control" type="text" name="nome" id="nome" value="{{setor.nome}}">
+                <input class="form-control" type="text" name="nome" value="{{predefinicao.nome}}">
             </div>
            
             <div class="float-right">
-                <a type="submit" class="btn btn-danger" href="/setor/lista">Cancelar</a>
+                <a type="submit" class="btn btn-danger" href="/predefinicao/lista">Cancelar</a>
                 <button type="submit" class="btn btn-success">Cadastrar</button>
             </div>
         </form>

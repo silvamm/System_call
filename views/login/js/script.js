@@ -26,7 +26,7 @@ form.addEventListener('submit', function(e) {
             // dataType: 'json',
     }).done(function() {
         resposta.innerHTML = ''
-        window.location = '/principal'
+        window.location = '/chamado/lista'
     }).fail(function(jXHR) {
         console.log(jXHR)
         if (jXHR != undefined) {

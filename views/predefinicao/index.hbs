@@ -1,0 +1,88 @@
+{{#section 'css'}}
+{{/section}}
+
+<section class="card">
+  <div class="card-header">Filtros</div>
+  <div class="card-body">
+
+    <div class="row">
+
+      <div class="col">
+        <input class="form-control" type="search" value="" placeholder="Nome" name="nome">
+      </div>
+
+      <div class="col">
+        <select class="form-control">
+          <option value="10">10 Registros</option>
+          <option value="20">20 Registros</option>
+          <option value="30">30 Registros</option>
+          <option value="50">50 Registros</option>
+          <option value="100">100 Registros</option>
+        </select>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-header">
+    Predefinições
+  </div>
+  <div class="card-body">
+    <a class="btn btn-primary float-right" href="/predefinicao"><i class="fa fa-plus"></i> Adicionar</a>
+
+    <table class="table table-bordered table-hover my-5">
+      <thead>
+        <tr>
+          <th>Nome</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each predefinicoes}}
+        <tr>
+          <td>{{nome}}</td>
+          <td><a type="button" class="btn btn-primary " value="Editar" href='/predefinicao/{{id}}'><i
+                class="fa fa-pencil"></i> Editar</a>
+            <button type="button" class="btn btn-danger" value="Excluir" onclick='excluir(this, {{id}})'><i
+                class="fa fa-trash-o"></i> Excluir</button></td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+{{#section 'js'}}
+<script>
+    $(function () {
+        document
+            .getElementById('add')
+            .addEventListener('click', function () {
+                window.location = '/predefinicao'
+            })
+
+    })
+
+    function excluir(item, id) {
+        if (confirm("Deseja realmente excluir o registro ? ")) {
+            $.ajax({
+                type: 'delete',
+                url: '/predefinicao/' + id
+            }).done(function () {
+                let tr = $(item).closest('tr')
+                tr.fadeOut(500, () => tr.remove())
+            }).fail(function (jXHR) {
+                console.log('Aconteceu um erro')
+            })
+        }
+    }
+
+    function editar(id) {
+        window.location = '/predefinicao/' + Number(id)
+    }
+</script>
+{{/section}}

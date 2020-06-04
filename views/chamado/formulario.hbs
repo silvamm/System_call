@@ -4,51 +4,16 @@
 <section class="card">
     <div class="card-header">Salvar Chamado</div>
     <div class="card-body">
-        <form class="" action="/usuario/" method="post" id="form">
+        <form class="" action="/chamado/" method="post" id="form">
             <input type="hidden" id="id" name="id" value="{{chamado.id}}" />
 
             <div class="form-group">
-                <label for="nome">Nome:</label>
-                <input class="form-control" type="text" name="nome" id="nome" value="{{usuario.nome}}">
+                <label for="descricao">Descrição:</label>
+                <textarea class="form-control" name="descricao" value="{{chamado.descricao}}"></textarea>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="tipo">Tipo de Usuário:</label>
-                        <select name="tipo" class="form-control" id="tipo">
-                            <option value="0" {{selected 'COMUM' ../usuario.tipo}}>COMUM</option>
-                            <option value="1" {{selected 'ADMINISTRADOR' ../usuario.tipo}}>ADMINISTRADOR</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="setor">Setor:</label>
-                        <select name="setor[id]" class="form-control" id="setor">
-                            {{#each setores}}
-                            <option  value={{id}} {{selected id ../usuario.setor.id}}>{{nome}}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="e-mail">Endereço de e-mail:</label>
-                        <input class="form-control" type="text" name="email" id="email" value="{{usuario.email}}">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="senha">Digite a senha:</label>
-                        <input class="form-control" type="password" name="senha" id="senha" {{#if usuario.id}}
-                            placeholder="Deixe em branco para manter a senha atual" {{/if}}>
-                    </div>
-                </div>
-            </div>
+
             <div class="float-right">
-                <a type="submit" class="btn btn-danger" href="/usuario/lista">Cancelar</a>
+                <a type="submit" class="btn btn-danger" href="/chamado/lista">Cancelar</a>
                 <button type="submit" class="btn btn-success">Cadastrar</button>
             </div>
         </form>

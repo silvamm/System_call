@@ -90,7 +90,7 @@ router.post('/', global.auth(), (req, res) => {
         })
 })
 
-router.delete('/:id', global.auth(), (req, res) => {
+router.delete('/:id(\\d+)', global.auth(), (req, res) => {
 
     superagent
         .delete('https://softrec.com.br/usuario/' + req.params.id)

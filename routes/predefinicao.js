@@ -1,36 +1,44 @@
 const
     express = require('express'),
-    router = express.Router(),
-    setorRest = require('../rest/setor.js')
+    predefinicaoRest = require('../rest/predefinicao.js'),
+    router = express.Router()
 
-
-router.get('/', global.auth(), (req, res) => {
-    res.render('setor/formulario')
+router.get('/lista', auth(), (req, res) => {
+    predefinicaoRest.list().end((error, result) => {
+        if (error) {
+            console.log(error)
+        }
+        let predefinicoes = result.body
+        res.render('predefinicao/index', { predefinicoes })
+    })
 })
 
-router.get('/:id(\\d+)', global.auth(), (req, res) => {
-    setorRest
+router.get('/', auth(), (req, res) => {
+    res.render('predefinicao/formulario')
+})
+
+router.get('/:id(\\d+)', auth(), (req, res) => {
+    predefinicaoRest
         .get(req.params.id)
         .end((error, result) => {
             if (error) {
                 console.log(error)
             }
-            let setor = result.body
-            res.render('setor/formulario', { setor })
-        });
-
+            let predefinicao = result.body
+            res.render('predefinicao/formulario', { predefinicao })
+        })
 })
 
-router.post('/', global.auth(), (req, res) => {
+router.post('/', auth(), (req, res) => {
 
     let
         promise,
-        setor = req.body
+        predefinicao = req.body
 
-    if (setor.id)
-        promise = setorRest.put(setor)
+    if (predefinicao.id)
+        promise = predefinicaoRest.put(predefinicao)
     else
-        promise = setorRest.post(setor)
+        promise = predefinicaoRest.post(predefinicao)
 
     let
         redirect,
@@ -46,28 +54,14 @@ router.post('/', global.auth(), (req, res) => {
                 res.render('notify/index', { redirect, success, mensagem })
             }
             success = true
-            redirect = '/setor/lista'
+            redirect = '/predefinicao/lista'
             res.render('notify/index', { redirect, success })
-        })
-})
-
-router.get('/lista', global.auth(), (req, res) => {
-    setorRest
-        .list()
-        .end((error, result) => {
-            if (error) {
-                console.log(error)
-                return res.sendStatus(error.status)
-            }
-            let setores = result.body
-            res.render('setor/index', { setores })
-
         })
 })
 
 router.delete('/:id(\\d+)', global.auth(), (req, res) => {
 
-    setorRest.delete(req.params.id)
+    predefinicaoRest.delete(req.params.id)
         .end((error, result) => {
             if (error) {
                 console.log(error)
@@ -77,4 +71,5 @@ router.delete('/:id(\\d+)', global.auth(), (req, res) => {
         })
 
 })
+
 module.exports = router
