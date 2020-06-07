@@ -1,0 +1,198 @@
+.Form{
+    left: 52%; 
+    margin: -130px 0 0 -210px; 
+    padding:10px;
+    position: absolute; 
+    top: 60%;
+}/*configuração para centralizar o formulario*/
+
+form div + div {
+    margin-top: 1em;
+}/* espaçamento de uma div para outra*/
+
+fieldset{
+
+width: 400px;
+text-align: center;
+margin:0 auto;
+border:1px solid #ccc;
+border-radius: 1em;
+background: #f8f8f8;
+}/* cinfiguração dos textos e borda do formulario*/
+
+fieldset legend{
+text-align: center;
+font-size: 22px;
+font-weight: bold;
+} /* Fieldset para configurar a palavra cadastro no topo do formulario */
+
+label{
+display:block;
+cursor: pointer;
+}
+
+textarea {
+
+width: 380px;
+height: 150px;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+border: 1px solid #999;
+} /* configuração da caixa de texto "descrição"*/
+
+
+header{
+position: fixed;
+left: 0;
+top: 0;
+width: 100%;
+padding: 9px 0;
+text-align: center;
+background: #069;
+} /* configuração do background do topo do site e centralização do texto*/
+
+.logo{
+position: absolute;
+width: 90px;
+top: 0px;  
+bottom: 0px;
+left: 0px;
+
+} /* configuração da logo-marca no topo do site*/
+
+header li{
+
+display: inline-block;
+margin: 0 10px;
+font-size: 20px;
+} /* configurações para posicionar o texto no topo do site*/
+
+header li{
+
+display: inline-block;
+margin: 0 10px;
+font-size: 20px;
+} /* configurações para posicionar o texto no topo do site*/
+
+header a{
+text-decoration: none;
+color:white;
+opacity: 0.8;
+
+} /* configuração de cor do texto do topo do site*/
+
+a:hover{
+opacity: 1;
+color:black;
+
+} /* Efeito dos botões*/
+
+
+.arq{
+    text-align: left;
+}
+
+input[type=submit]{
+
+    display: block;
+    background-color: #ccc;
+    height: 30px;
+    border: none;
+    outline: 0;
+    cursor: pointer;
+    width: 100px;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 13px;
+}/*configuração e efeitos do botão enviar */
+
+.rodape{
+
+    margin-top: 43%;
+    text-align: center; font-size: 14px;
+    width: 100%;
+    padding: 9px 0;
+    text-align: center;
+    color: white;
+    background: #069;
+}/*configuração do rodape da pagina*/
+
+body{
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box;
+    }
+
+
+header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 9px 0;
+    text-align: center;
+    background: #069;
+} /* configuração do background do topo do site e centralização do texto*/
+
+.logo{
+    position: absolute;
+    width: 90px;
+    top: 0px;  
+    bottom: 0px;
+    left: 0px;
+
+} /* configuração da logo-marca no topo do site*/
+
+header li{
+
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 20px;
+} /* configurações para posicionar o texto no topo do site*/
+
+header a{
+    text-decoration: none;
+    color:white;
+    opacity: 0.8;
+    
+} /* configuração de cor do texto do topo do site*/
+
+a:hover{
+  opacity: 1;
+  color:black;
+  
+}
+
+form{
+        left: 52%; 
+        margin: -130px 0 0 -210px; 
+        padding:10px;
+        position: absolute; 
+        top: 50%;
+        
+} /* esse form é para centralizar no meio da pagina o formulario de cadastro*/
+
+
+fieldset{
+    padding:1em;
+    width: 280px;
+    text-align: left;
+    margin:0 auto;
+    border:1px solid #ccc;
+    border-radius: 1em;
+    background: #f8f8f8;
+} /* Fieldset para configurar a parte interna e bordas do formulario*/
+
+    .rodape{
+
+    margin-top: 43%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    text-align: center; font-size: 14px;
+    width: 100%;
+    padding: 9px 0;
+    text-align: center;
+    color: white;
+    background: #069;
+    }
