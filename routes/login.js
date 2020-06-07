@@ -13,9 +13,14 @@ router.post('/', (req, res) => {
         .end((error, result) => {
             if (error) return res.sendStatus(error.status)
 
-            req.session.nome = result.body.nome
-            req.session.email = result.body.email
-            if (result.body.tipo == 'ADMINISTRADOR') req.session.admin = true
+            let usuario = {}
+            usuario.nome = result.body.nome
+            usuario.email = result.body.email
+            usuario.id = result.body.id
+            usuario.admin = result.body.tipo == 'ADMINISTRADOR' ? true : false
+
+            req.session.usuario = usuario
+
             res.sendStatus(result.status)
         })
 })

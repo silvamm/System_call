@@ -1,44 +1,65 @@
 {{#section 'css'}}
 {{/section}}
 
-<section class="card">
-  <div class="card-header">Filtros</div>
-  <div class="card-body">
+<form action="/usuario/lista" method="get">
+  <section class="card">
+    <div class="card-header">Filtros</div>
+    <div class="card-body">
+      <div class="row">
 
-    <div class="row">
-      <div class="col">
-        <select class="form-control">
-          <option value="">Todos</option>
-          <option value="0">Comum</option>
-          <option value="1">Administrador</option>
-        </select>
-      </div>
-      <div class="col">
-        <select class="form-control">
-          {{#each setores}}
-          <option value="{{id}}">{{nome}}</option>
-          {{/each}}
-        </select>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+          <div class="form-group">
+            <select class="form-control" name="tipo">
+              <option value="" {{selected '' ./query.tipo}}>Todos os usuários</option>
+              <option value="0" {{selected '0' ./query.tipo}}>Todos comuns</option>
+              <option value="1" {{selected '1' ./query.tipo}}>Todos adminstradores</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-2">
+          <div class="form-group">
+            <select class="form-control" name="setor[id]">
+              <option value="">Todos os setores</option>
+              {{#each setores}}
+              <option value="{{id}}" {{selected id ../query.idSetor}}>{{nome}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+          <div class="form-group">
+            <input class="form-control" type="search" value="{{query.nomeEmail}}" placeholder="Nome ou e-mail"
+              name="nomeEmail">
+          </div>
+        </div>
+
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-2">
+          <div class="form-group">
+            <select class="form-control" name="exibir">
+              <option value="10">10 Registros</option>
+              <option value="20">20 Registros</option>
+              <option value="30">30 Registros</option>
+              <option value="40">40 Registros</option>
+              <option value="50">50 Registros</option>
+              <option value="100">100 Registros</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-2">
+          <div class="form-group">
+            <button class="btn btn-primary btn-block float-right"><i class="fa fa-search"></i> Buscar</button>
+          </div>
+        </div>
+
       </div>
 
-      <div class="col">
-        <input class="form-control" type="search" value="" placeholder="Nome ou e-mail" name="Buscar">
-      </div>
-      <div class="col">
-        <select class="form-control">
-          <option value="10">10 Registros</option>
-          <option value="20">20 Registros</option>
-          <option value="30">30 Registros</option>
-          <option value="50">50 Registros</option>
-          <option value="100">100 Registros</option>
-        </select>
-      </div>
-      <div class="col">
-        <button class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-      </div>
     </div>
-  </div>
-</section>
+  </section>
+</form>
 
 <section class="card">
   <div class="card-header">
@@ -47,14 +68,15 @@
   <div class="card-body">
     <a class="btn btn-primary float-right" href="/usuario"><i class="fa fa-plus"></i> Adicionar</a>
 
+    {{#if usuarios}}
     <table class="table table-bordered table-hover my-5">
       <thead>
         <tr>
-          <th>Nome</th>
-          <th>Tipo</th>
-          <th>Setor</th>
-          <th>E-mail</th>
-          <th>Ações</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Setor</th>
+          <th scope="col">E-mail</th>
+          <th scope="col" class="text-center">Ações</th>
         </tr>
       </thead>
       <tbody>
@@ -64,7 +86,7 @@
           <td>{{tipo}}</td>
           <td>{{setor.nome}}</td>
           <td>{{email}}</td>
-          <td><a type="button" class="btn btn-primary " value="Editar" href='/usuario/{{id}}'><i
+          <td class="text-center"><a type="button" class="btn btn-primary " value="Editar" href='/usuario/{{id}}'><i
                 class="fa fa-pencil"></i> Editar</a>
             <button type="button" class="btn btn-danger" value="Excluir" onclick='excluir(this, {{id}})'><i
                 class="fa fa-trash-o"></i> Excluir</button></td>
@@ -72,6 +94,13 @@
         {{/each}}
       </tbody>
     </table>
+    {{else}}
+    <div class="row">
+      <div class="col text-center">
+        <p style="font-size: 24px;">Nenhum registro encontrado</p>
+      </div>
+    </div>
+    {{/if}}
   </div>
 </section>
 

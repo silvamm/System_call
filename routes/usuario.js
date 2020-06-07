@@ -5,7 +5,7 @@ const
     usuarioRest = require('../rest/usuario.js'),
     router = express.Router()
 
-router.get('/', global.auth(), (req, res) => {
+router.get('/', (req, res) => {
 
     setorRest
         .list()
@@ -28,7 +28,6 @@ router.get('/:id(\\d+)', global.auth(), (req, res) => {
         .then((results) => {
             setores = results[0].body
             usuario = results[1].body
-            console.log(usuario)
             res.render('usuario/formulario', { setores, usuario })
         }).catch(error => console.log(error))
 
@@ -36,12 +35,27 @@ router.get('/:id(\\d+)', global.auth(), (req, res) => {
 
 router.get('/lista', global.auth(), (req, res) => {
 
-    let setores, usuarios
+    let
+        setores,
+        usuarios,
+        query = {}
+
+    console.log(req.query)
+
+    query.nomeEmail = req.query.nomeEmail
+
+    if (req.query.setor)
+        query.idSetor = req.query.setor.id
+
+    if (req.query.tipo)
+        query.tipo = req.query.tipo
+
+    console.log(query)
 
     Promise
         .all([
             setorRest.list(),
-            usuarioRest.list()
+            usuarioRest.list(query)
         ])
         .then((results) => {
             setores = results[0].body
@@ -51,7 +65,7 @@ router.get('/lista', global.auth(), (req, res) => {
                 usuario.tipo = usuario.tipo == 'COMUM' ? 'Comum' : 'Administrador'
             )
 
-            res.render('usuario/index', { usuarios, setores })
+            res.render('usuario/index', { usuarios, setores, query })
 
         }).catch(error => console.log(error))
 

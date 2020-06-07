@@ -5,8 +5,24 @@
     <div class="card-header">Salvar Chamado</div>
     <div class="card-body">
         <form class="" action="/chamado/" method="post" id="form">
-            <input type="hidden" id="id" name="id" value="{{chamado.id}}" />
 
+            <input type="hidden" name="id" value="{{chamado.id}}" />
+            <input type="hidden" name="criadoPor[id]" value="{{chamado.criadoPor.id}}" />
+            <input type="hidden" name="criadoEm" value="{{chamado.criadoEm}}" />
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="predefinicao[id]">Problema</label>
+                        <select name="predefinicao[id]" class="form-control">
+                            <option disabled selected value> Selecione </option>
+                            {{#each predefinicoes}}
+                            <option value={{id}} {{selected id ../chamado.predefinicao.id}}>{{nome}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
                 <label for="descricao">Descrição:</label>
                 <textarea class="form-control" name="descricao" value="{{chamado.descricao}}"></textarea>

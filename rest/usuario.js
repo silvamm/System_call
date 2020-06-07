@@ -4,9 +4,11 @@ const
 
 class UsuarioRest {
 
-    list() {
-        return superagent
-            .get(global.url + '/usuario/')
+    list(query) {
+        if (query)
+            return superagent.get(global.url + '/usuario/query').send(query)
+        else
+            return superagent.get(global.url + '/usuario/')
     }
 
     get(id) {

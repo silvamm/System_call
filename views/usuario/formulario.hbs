@@ -16,8 +16,9 @@
                     <div class="form-group">
                         <label for="tipo">Tipo de Usuário:</label>
                         <select name="tipo" class="form-control" id="tipo">
-                            <option value="0" {{selected 'COMUM' ../usuario.tipo}}>COMUM</option>
-                            <option value="1" {{selected 'ADMINISTRADOR' ../usuario.tipo}}>ADMINISTRADOR</option>
+                            <option disabled selected value> Selecione </option>
+                            <option value="0" {{selected 'COMUM' ./usuario.tipo}}>COMUM</option>
+                            <option value="1" {{selected 'ADMINISTRADOR' ./usuario.tipo}}>ADMINISTRADOR</option>
                         </select>
                     </div>
                 </div>
@@ -25,6 +26,7 @@
                     <div class="form-group">
                         <label for="setor">Setor:</label>
                         <select name="setor[id]" class="form-control" id="setor">
+                            <option disabled selected value> Selecione </option>
                             {{#each setores}}
                             <option  value={{id}} {{selected id ../usuario.setor.id}}>{{nome}}</option>
                             {{/each}}

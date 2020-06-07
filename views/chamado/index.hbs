@@ -1,88 +1,137 @@
 {{#section 'css'}}
 {{/section}}
 
-<section class="card">
-  <div class="card-header">Filtros</div>
-  <div class="card-body">
+<form action="/chamado/lista" method="get">
+  <section class="card">
+    <div class="card-header">Filtros</div>
+    <div class="card-body">
+      <div class="row">
 
-    <div class="row">
-      <div class="col">
-        <select class="form-control">
-          <option value="ca">Chamados Abertos</option>
-          <option value="cp">Chamados Pendentes</option>
-          <option value="ce">Chamados Encerrados</option>
-          <option value="tc">Todos os Chamados</option>
-        </select>
-      </div>
-      <div class="col">
-        <select class="form-control">
-          <option value="ASe">Secretária</option>
-          <option value="AFi">Financeiro</option>
-          <option value="Au">Aberto por qualquer um</option>
-          <option value="ABi">Biblioteca</option>
-          <option value="AGr">Graduação</option>
-          <option value="APo">Pós Graduação</option>
-        </select>
+        <div class="col-12 col-sm-12 
+        {{#if session.usuario.admin}}
+           col-md-6 col-lg-6 col-xl-3
+        {{else}}
+          col-md-12 col-lg-12 col-xl-3
+        {{/if}}">
+
+          <div class="form-group">
+             <select class="form-control" name="status">
+              <option value="" {{selected '' ./query.status}}>Todos os chamados</option>
+              <option value="0" {{selected '0' ./query.status}}>Chamados pendentes</option>
+              <option value="1" {{selected '1' ./query.status}}>Chamados visualizados</option>
+              <option value="2" {{selected '2' ./query.status}}>Chamados aceitos</option>
+              <option value="3" {{selected '3' ./query.status}}>Chamados cancelados</option>
+              <option value="4" {{selected '4' ./query.status}}>Chamados encerrados</option>
+            </select>
+          </div>
+        </div>
+
+        {{#if session.usuario.admin}}
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-2">
+          <div class="form-group">
+
+            <select class="form-control" name="setor[id]">
+              <option value="">Todos os setores</option>
+              {{#each setores}}
+              <option value="{{id}}"{{selected id ../query.idSetor}}>{{nome}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+        {{/if}}
+
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12  
+        {{#if session.usuario.admin}}
+          col-xl-3
+        {{else}}
+          col-xl-5
+        {{/if}}">
+          <div class="form-group">
+            <input class="form-control" type="search" value="{{query.protocolo}}" placeholder="Protocolo"
+              name="protocolo">
+          </div>
+        </div>
+
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-2">
+          <div class="form-group">
+            <select class="form-control" name="exibir">
+              <option value="10">10 Registros</option>
+              <option value="20">20 Registros</option>
+              <option value="30">30 Registros</option>
+              <option value="40">40 Registros</option>
+              <option value="50">50 Registros</option>
+              <option value="100">100 Registros</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-2">
+          <div class="form-group">
+            <button class="btn btn-primary btn-block float-right"><i class="fa fa-search"></i> Buscar</button>
+          </div>
+        </div>
+
       </div>
 
-      <div class="col">
-        <input class="form-control" type="search" value="" placeholder="Protocolo" name="Buscar">
-      </div>
-       <div class="col">
-        <select class="form-control">
-          <option value="ASe">10 Registros</option>
-          <option value="AFi">Financeiro</option>
-          <option value="Au">Aberto por qualquer um</option>
-          <option value="ABi">Biblioteca</option>
-          <option value="AGr">Graduação</option>
-          <option value="APo">Pós Graduação</option>
-        </select>
-      </div>
-      <div class="col">
-        <button class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-      </div>
     </div>
-  </div>
-</section>
+  </section>
+</form>
 
 <section class="card">
   <div class="card-header">
-    {{#ifnot session.admin}}Meus {{/ifnot}}Chamados</div>
+    {{#ifnot session.usuario.admin}}Meus {{/ifnot}}Chamados</div>
   <div class="card-body">
 
-    {{#ifnot session.admin}}
-     <a class="btn btn-primary float-right" href="/chamado"><i class="fa fa-plus"></i> Abrir chamado</a>
+    {{#ifnot session.usuario.admin}}
+    <div class="row">
+      <div class="col">
+        <a class="btn btn-primary float-right mb-2" href="/chamado"><i class="fa fa-plus"></i> Abrir chamado</a>
+      </div>
+    </div>
     {{/ifnot}}
 
-    <table class="table table-bordered table-hover my-5">
-      <thead>
-        <tr>
-          <th>Protocolo</th>
-          <th>Descrição</th>
-          <th>Setor</th>
-          <th>Situação</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-     <tbody>
-        <tr>
-          <td><a href="#">Vector Ltd</a></td>
-          <td class="hidden-phone">Lorem Ipsum dorolo imit</td>
-          <td>12120.00$ </td>
-          <td><span class="badge badge-info label-mini">Due</span></td>
-          <td>
-            {{#if session.admin}}
-            <button title="Aceitar" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Aceitar</button>
-            {{/if}}
-            <button class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Detalhes</button>
-            {{#if session.admin}}
-            <button class="btn btn-danger btn-sm"><i class="fa fa-times "></i> Encerrar</button>
-            {{/if}}
-          </td>
-        </tr>
-  </tbody>
-      
-    </table>
+    {{#if chamados}}
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Protocolo</th>
+            <th scope="col">Problema</th>
+            {{#if session.usuario.admin}}<th scope="col">Setor</th>{{/if}}
+            <th scope="col">Situação</th>
+            <th scope="col">Prioridade</th>
+            <th scope="col" class="text-center col-lg-4">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each chamados}}
+          <tr>
+            <td>{{protocolo}}</td>
+            <td>{{predefinicao.nome}}</td>
+            {{#if ../session.usuario.admin}}<td>{{criadoPor.setor.nome}}</td>{{/if}}
+            <td>{{status}}</td>
+            <td>{{prioridade}}</td>
+            <td class="text-center">
+              {{#if ../session.usuario.admin}}
+              <button title="Aceitar" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Aceitar</button>
+              {{/if}}
+              <button class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Detalhes</button>
+              {{#if ../session.usuario.admin}}
+              <button class="btn btn-danger btn-sm"><i class="fa fa-times "></i> Encerrar</button>
+              {{/if}}
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    {{else}}
+    <div class="row">
+      <div class="col text-center">
+        <p style="font-size: 24px;">Nenhum registro encontrado</p>
+      </div>
+    </div>
+    {{/if}}
   </div>
 </section>
 

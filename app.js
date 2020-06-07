@@ -43,7 +43,7 @@ app.use(function(req, res, next) {
 //autenticacao
 global.auth = () => {
     return function(req, res, next) {
-        if (!req.session || !req.session.email)
+        if (!req.session || !req.session.usuario)
             return res.redirect('/login')
         next()
     }
@@ -62,7 +62,7 @@ app.engine('hbs',
                 return;
             },
             selected: function(key, value) {
-                return key === value ? ' selected' : '';
+                return key == value ? ' selected' : '';
             },
             ifnot: function(conditional, options) {
                 if (!conditional)

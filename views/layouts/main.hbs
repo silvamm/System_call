@@ -42,7 +42,7 @@
                     <!-- user login dropdown start-->
                     <li class="">
                         <a href="#">
-                            <span class="username">Jhon Doue</span>
+                            <span class="username">{{session.usuario.nome}}</span>
                         </a>
                     </li>
                     <!-- user login dropdown end -->
@@ -60,10 +60,10 @@
                     <li>
                         <a href="/chamado/lista">
                             <i class="fa fa-bullhorn"></i>
-                            <span>Chamados</span>
+                            <span>{{#ifnot session.usuario.admin}}Meus {{/ifnot}}Chamados</span>
                         </a>
                     </li>
-
+                    {{#if session.usuario.admin}}
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-plus"></i>
@@ -72,10 +72,11 @@
                         <ul class="sub">
                             <li><a href="/usuario/lista">Usuários</a></li>
                             <li><a href="/setor/lista">Setores</a></li>
-                            <li><a href="/predefinicao/lista">Predefinições</a></li>
+                            <li><a href="/predefinicao/lista">Problemas</a></li>
                         </ul>
                     </li>
-
+                   
+                    {{/if}}
                     <li>
                         <a href="/logout">
                             <i class="fa fa-sign-out"></i>
