@@ -14,25 +14,6 @@ form.addEventListener('submit', function(e) {
 
     resposta.innerHTML = '<strong style="color:green;">Iniciando autenticação ... </strong>'
     btn.disabled = true
+    form.submit()
 
-    $.ajax({
-        type: 'post',
-        contentType: 'application/json',
-        url: "/login/",
-        data: JSON.stringify({
-                email: email,
-                senha: senha
-            })
-            // dataType: 'json',
-    }).done(function() {
-        resposta.innerHTML = ''
-        window.location = '/chamado/lista'
-    }).fail(function(jXHR) {
-        console.log(jXHR)
-        if (jXHR != undefined) {
-            if (jXHR.status = 404) {
-                resposta.innerHTML = '<strong style="color:red;">E-mail ou senha incorretos</strong>'
-            }
-        }
-    }).always(() => btn.disabled = false);
 })

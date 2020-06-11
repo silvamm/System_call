@@ -3,16 +3,23 @@ const
     router = express.Router(),
     superagent = require('superagent')
 
-
 router.get('/', (req, res) => res.render('login/index', { layout: 'login' }))
 
 router.post('/', (req, res) => {
+
     superagent
         .post(global.url + '/login/')
         .send(req.body)
         .end((error, result) => {
-            if (error) return res.sendStatus(error.status)
+            if (error) {
 
+                console.log(error)
+                let mensagem
+                if (error.status == 404)
+                    mensagem = "E-mail ou senha incorretos"
+
+                return res.render('login/index', { layout: 'login', mensagem })
+            }
             let usuario = {}
             usuario.nome = result.body.nome
             usuario.email = result.body.email
@@ -21,7 +28,7 @@ router.post('/', (req, res) => {
 
             req.session.usuario = usuario
 
-            res.sendStatus(result.status)
+            return res.redirect('/chamado/lista')
         })
 })
 

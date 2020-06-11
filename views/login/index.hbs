@@ -2,20 +2,22 @@
 {{/section}}
 
 <div class="container">
-
-    <form id="form" class="form-signin" >
-        <div align="center" class="logo">
-            <img class="img-fluid" src="/img/logo3.png" width="250">
-        </div>
+ 
+    <form id="form" class="form-signin mt-n3" action="/login/" method="post">
+    <div align="center" style="background-color: #f1f2f7;;">
+        <img class="img-fluid" src="/img/logo3.png" width="250">
+    </div>
+    <h2 class="form-signin-heading">Login</h2>
         <div class="login-wrap">
-            <div class="text-center my-2" id="resposta"></div>
-            <input type="text" id="login" class="form-control" placeholder="E-mail" autofocus>
-            <input type="password" id="password" class="form-control" placeholder="Senha">
+            <div class="text-center " id="resposta"><strong style="color:red;">{{mensagem}}</strong></div>
+            <input type="text" id="login" name="email" class="form-control mt-2" placeholder="E-mail" autofocus>
+            <input type="password" id="password" name="senha" class="form-control" placeholder="Senha">
             <br />
             <button class="btn btn-lg btn-login btn-block" id="btnSubmit" type="submit">Entrar</button>
 
         </div>
     </form>
+ 
 
 </div>
 

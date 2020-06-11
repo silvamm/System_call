@@ -64,6 +64,10 @@ app.engine('hbs',
             selected: function(key, value) {
                 return key == value ? ' selected' : '';
             },
+            equals: function(key, value, options) {
+                if (key == value)
+                    return options.fn(this)
+            },
             ifnot: function(conditional, options) {
                 if (!conditional)
                     return options.fn(this)

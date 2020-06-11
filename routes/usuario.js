@@ -3,7 +3,9 @@ const
     superagent = require('superagent'),
     setorRest = require('../rest/setor.js'),
     usuarioRest = require('../rest/usuario.js'),
-    router = express.Router()
+    router = express.Router(),
+    menu = 'cadastro',
+    submenu = 'usuario'
 
 router.get('/', (req, res) => {
 
@@ -11,12 +13,12 @@ router.get('/', (req, res) => {
         .list()
         .then((result) => {
             let setores = result.body
-            res.render('usuario/formulario', { setores })
+            res.render('usuario/formulario', { setores, menu, submenu })
         }).catch(error => console.log(error))
 
 })
 
-router.get('/:id(\\d+)', global.auth(), (req, res) => {
+router.get('/:id(\\d+)', (req, res) => {
 
     let setores, usuario
 
@@ -28,12 +30,12 @@ router.get('/:id(\\d+)', global.auth(), (req, res) => {
         .then((results) => {
             setores = results[0].body
             usuario = results[1].body
-            res.render('usuario/formulario', { setores, usuario })
+            res.render('usuario/formulario', { setores, usuario, menu, submenu })
         }).catch(error => console.log(error))
 
 })
 
-router.get('/lista', global.auth(), (req, res) => {
+router.get('/lista', (req, res) => {
 
     let
         setores,
@@ -65,13 +67,13 @@ router.get('/lista', global.auth(), (req, res) => {
                 usuario.tipo = usuario.tipo == 'COMUM' ? 'Comum' : 'Administrador'
             )
 
-            res.render('usuario/index', { usuarios, setores, query })
+            res.render('usuario/index', { usuarios, setores, query, menu, submenu })
 
         }).catch(error => console.log(error))
 
 })
 
-router.post('/', global.auth(), (req, res) => {
+router.post('/', (req, res) => {
 
     let
         promise,
@@ -96,11 +98,11 @@ router.post('/', global.auth(), (req, res) => {
                 console.log(error)
                 success = false
                 mensagem = error.response.body.message
-                return res.render('notify/index', { redirect, success, mensagem })
+                return res.render('notify/index', { redirect, success, mensagem, menu, submenu })
             }
             success = true
             redirect = '/usuario/lista'
-            res.render('notify/index', { redirect, success })
+            res.render('notify/index', { redirect, success, menu, submenu })
         })
 })
 

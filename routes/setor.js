@@ -1,11 +1,13 @@
 const
     express = require('express'),
     router = express.Router(),
-    setorRest = require('../rest/setor.js')
+    setorRest = require('../rest/setor.js'),
+    menu = 'cadastro',
+    submenu = 'setor'
 
 
 router.get('/', global.auth(), (req, res) => {
-    res.render('setor/formulario')
+    res.render('setor/formulario', { menu, submenu })
 })
 
 router.get('/:id(\\d+)', global.auth(), (req, res) => {
@@ -16,7 +18,7 @@ router.get('/:id(\\d+)', global.auth(), (req, res) => {
                 console.log(error)
             }
             let setor = result.body
-            res.render('setor/formulario', { setor })
+            res.render('setor/formulario', { setor, menu, submenu })
         });
 
 })
@@ -43,11 +45,11 @@ router.post('/', global.auth(), (req, res) => {
                 res.sendStatus(error.status)
                 success = false
                 mensagem = error.response.body.message
-                res.render('notify/index', { redirect, success, mensagem })
+                res.render('notify/index', { redirect, success, mensagem, menu, submenu })
             }
             success = true
             redirect = '/setor/lista'
-            res.render('notify/index', { redirect, success })
+            res.render('notify/index', { redirect, success, menu, submenu })
         })
 })
 
@@ -60,7 +62,7 @@ router.get('/lista', global.auth(), (req, res) => {
                 return res.sendStatus(error.status)
             }
             let setores = result.body
-            res.render('setor/index', { setores })
+            res.render('setor/index', { setores, menu, submenu })
 
         })
 })

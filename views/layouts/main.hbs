@@ -58,21 +58,21 @@
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
                     <li>
-                        <a href="/chamado/lista">
+                        <a {{#equals menu 'chamado'}}class="active"{{/equals}} href="/chamado/lista">
                             <i class="fa fa-bullhorn"></i>
-                            <span>{{#ifnot session.usuario.admin}}Meus {{/ifnot}}Chamados</span>
+                            <span>{{#unless session.usuario.admin}}Meus {{/unless}}Chamados</span>
                         </a>
                     </li>
                     {{#if session.usuario.admin}}
                     <li class="sub-menu">
-                        <a href="javascript:;">
+                        <a {{#equals menu 'cadastro'}}class="active"{{/equals}} href="javascript:;">
                             <i class="fa fa-plus"></i>
                             <span>Cadastros</span>
                         </a>
                         <ul class="sub">
-                            <li><a href="/usuario/lista">Usuários</a></li>
-                            <li><a href="/setor/lista">Setores</a></li>
-                            <li><a href="/predefinicao/lista">Problemas</a></li>
+                            <li {{#equals submenu 'usuario'}}class="active"{{/equals}}><a href="/usuario/lista">Usuários</a></li>
+                            <li {{#equals submenu 'setor'}}class="active"{{/equals}}><a href="/setor/lista">Setores</a></li>
+                            <li {{#equals submenu 'predefinicao'}}class="active"{{/equals}}><a href="/predefinicao/lista">Problemas</a></li>
                         </ul>
                     </li>
                    

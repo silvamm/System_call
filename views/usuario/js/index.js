@@ -1,12 +1,3 @@
-$(function() {
-    document
-        .getElementById('add')
-        .addEventListener('click', function() {
-            window.location = '/usuario'
-        })
-
-})
-
 function excluir(item, id) {
     if (confirm("Deseja realmente excluir o registro ? ")) {
         $.ajax({

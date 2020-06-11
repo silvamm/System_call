@@ -1,7 +1,9 @@
 const
     express = require('express'),
     predefinicaoRest = require('../rest/predefinicao.js'),
-    router = express.Router()
+    router = express.Router(),
+    menu = 'cadastro',
+    submenu = 'predefinicao'
 
 router.get('/lista', auth(), (req, res) => {
     predefinicaoRest.list().end((error, result) => {
@@ -9,12 +11,12 @@ router.get('/lista', auth(), (req, res) => {
             console.log(error)
         }
         let predefinicoes = result.body
-        res.render('predefinicao/index', { predefinicoes })
+        res.render('predefinicao/index', { predefinicoes, menu, submenu })
     })
 })
 
 router.get('/', auth(), (req, res) => {
-    res.render('predefinicao/formulario')
+    res.render('predefinicao/formulario', { menu, submenu })
 })
 
 router.get('/:id(\\d+)', auth(), (req, res) => {
@@ -25,7 +27,7 @@ router.get('/:id(\\d+)', auth(), (req, res) => {
                 console.log(error)
             }
             let predefinicao = result.body
-            res.render('predefinicao/formulario', { predefinicao })
+            res.render('predefinicao/formulario', { predefinicao, menu, submenu })
         })
 })
 
@@ -51,11 +53,11 @@ router.post('/', auth(), (req, res) => {
                 res.sendStatus(error.status)
                 success = false
                 mensagem = error.response.body.message
-                res.render('notify/index', { redirect, success, mensagem })
+                res.render('notify/index', { redirect, success, mensagem, menu, submenu })
             }
             success = true
             redirect = '/predefinicao/lista'
-            res.render('notify/index', { redirect, success })
+            res.render('notify/index', { redirect, success, menu, submenu })
         })
 })
 

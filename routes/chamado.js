@@ -3,7 +3,8 @@ const
     router = express.Router(),
     predefinicaoRest = require('../rest/predefinicao.js'),
     chamadoRest = require('../rest/chamado.js'),
-    setorRest = require('../rest/setor.js')
+    setorRest = require('../rest/setor.js'),
+    menu = 'chamado'
 
 router.get('/lista', auth(), (req, res) => {
 
@@ -12,8 +13,6 @@ router.get('/lista', auth(), (req, res) => {
         setores,
         usuario = req.session.usuario,
         query = {}
-
-    console.log(req.query)
 
     query.protocolo = req.query.protocolo
 
@@ -26,8 +25,6 @@ router.get('/lista', auth(), (req, res) => {
     if (!usuario.admin)
         query.idUsuario = usuario.id
 
-    console.log(query)
-
     Promise
         .all([
             setorRest.list(),
@@ -38,7 +35,7 @@ router.get('/lista', auth(), (req, res) => {
             setores = results[0].body
             chamados = results[1].body
 
-            return res.render('chamado/index', { chamados, setores, query })
+            return res.render('chamado/index', { chamados, setores, query, menu })
 
         }).catch(error => console.log(error))
 
@@ -53,7 +50,7 @@ router.get('/', auth(), (req, res) => {
                 console.log(error)
             }
             let predefinicoes = result.body
-            res.render('chamado/formulario', { predefinicoes })
+            res.render('chamado/formulario', { predefinicoes, menu })
         })
 
 })
@@ -81,10 +78,10 @@ router.post('/', auth(), (req, res) => {
             success = error ? false : true
             if (error) {
                 message = error.response.body.message
-                return res.render('notify/', { success, message })
+                return res.render('notify/', { success, message, menu })
             }
             redirect = '/chamado/lista'
-            res.render('notify/', { redirect, success })
+            res.render('notify/', { redirect, success, menu })
         })
 
 })

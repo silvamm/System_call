@@ -79,19 +79,19 @@
 
 <section class="card">
   <div class="card-header">
-    {{#ifnot session.usuario.admin}}Meus {{/ifnot}}Chamados</div>
+    {{#unless session.usuario.admin}}Meus {{/unless}}Chamados</div>
   <div class="card-body">
 
-    {{#ifnot session.usuario.admin}}
+    {{#unless session.usuario.admin}}
     <div class="row">
       <div class="col">
         <a class="btn btn-primary float-right mb-2" href="/chamado"><i class="fa fa-plus"></i> Abrir chamado</a>
       </div>
     </div>
-    {{/ifnot}}
+    {{/unless}}
 
     {{#if chamados}}
-    <div class="table-responsive">
+    <div class="table-responsive-xl">
       <table class="table table-bordered table-hover">
         <thead>
           <tr>
@@ -100,7 +100,7 @@
             {{#if session.usuario.admin}}<th scope="col">Setor</th>{{/if}}
             <th scope="col">Situação</th>
             <th scope="col">Prioridade</th>
-            <th scope="col" class="text-center col-lg-4">Ações</th>
+            <th scope="col" style="width: 30%;" class="text-center col-lg-4">Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -113,11 +113,11 @@
             <td>{{prioridade}}</td>
             <td class="text-center">
               {{#if ../session.usuario.admin}}
-              <button title="Aceitar" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Aceitar</button>
+              <button style="width: 95px;" title="Aceitar" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Aceitar</button>
               {{/if}}
-              <button class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> Detalhes</button>
+              <button style="width: 95px;" class="btn btn-primary btn-sm my-sm-1"><i class="fa fa-eye"></i> Detalhes</button>
               {{#if ../session.usuario.admin}}
-              <button class="btn btn-danger btn-sm"><i class="fa fa-times "></i> Encerrar</button>
+              <button style="width: 95px;" class="btn btn-danger btn-sm "><i class="fa fa-times "></i> Encerrar</button>
               {{/if}}
             </td>
           </tr>
