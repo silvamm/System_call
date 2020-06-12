@@ -1,7 +1,6 @@
 const
     superagent = require('superagent')
 
-
 class UsuarioRest {
 
     list(query) {

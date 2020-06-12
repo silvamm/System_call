@@ -1,7 +1,7 @@
 const
     express = require('express'),
     router = express.Router(),
-    predefinicaoRest = require('../rest/predefinicao.js'),
+    predefinicaoRest = require('../rest/problema.js'),
     chamadoRest = require('../rest/chamado.js'),
     setorRest = require('../rest/setor.js'),
     menu = 'chamado'
@@ -55,6 +55,23 @@ router.get('/', auth(), (req, res) => {
 
 })
 
+router.get('/:id(\\d+)', auth(), (req, res) => {
+
+    Promise
+        .all([
+            predefinicaoRest.list(),
+            chamadoRest.get(req.params.id)
+        ])
+        .then((results) => {
+            let problemas = results[0].body
+            let chamado = results[1].body
+
+            res.render('chamado/formulario', { chamado, problemas })
+        })
+        .catch((error) => console.log(error))
+
+})
+
 router.post('/', auth(), (req, res) => {
 
     let
@@ -62,6 +79,7 @@ router.post('/', auth(), (req, res) => {
         chamado = req.body
 
     chamado.criadoPor.id = req.session.usuario.id
+    chamado.criadoEm = Number(chamado.criadoEm)
 
     if (chamado.id)
         promise = chamadoRest.put(chamado)
@@ -77,6 +95,7 @@ router.post('/', auth(), (req, res) => {
         .end((error, result) => {
             success = error ? false : true
             if (error) {
+                console.log(error)
                 message = error.response.body.message
                 return res.render('notify/', { success, message, menu })
             }

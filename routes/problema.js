@@ -1,33 +1,33 @@
 const
     express = require('express'),
-    predefinicaoRest = require('../rest/predefinicao.js'),
+    problemaRest = require('../rest/problema.js'),
     router = express.Router(),
     menu = 'cadastro',
-    submenu = 'predefinicao'
+    submenu = 'problema'
 
 router.get('/lista', auth(), (req, res) => {
-    predefinicaoRest.list().end((error, result) => {
+    problemaRest.list().end((error, result) => {
         if (error) {
             console.log(error)
         }
-        let predefinicoes = result.body
-        res.render('predefinicao/index', { predefinicoes, menu, submenu })
+        let problemas = result.body
+        res.render('problema/index', { problemas, menu, submenu })
     })
 })
 
 router.get('/', auth(), (req, res) => {
-    res.render('predefinicao/formulario', { menu, submenu })
+    res.render('problema/formulario', { menu, submenu })
 })
 
 router.get('/:id(\\d+)', auth(), (req, res) => {
-    predefinicaoRest
+    problemaRest
         .get(req.params.id)
         .end((error, result) => {
             if (error) {
                 console.log(error)
             }
-            let predefinicao = result.body
-            res.render('predefinicao/formulario', { predefinicao, menu, submenu })
+            let problema = result.body
+            res.render('problema/formulario', { problema, menu, submenu })
         })
 })
 
@@ -35,12 +35,12 @@ router.post('/', auth(), (req, res) => {
 
     let
         promise,
-        predefinicao = req.body
+        problema = req.body
 
-    if (predefinicao.id)
-        promise = predefinicaoRest.put(predefinicao)
+    if (problema.id)
+        promise = problemaRest.put(problema)
     else
-        promise = predefinicaoRest.post(predefinicao)
+        promise = problemaRest.post(problema)
 
     let
         redirect,
@@ -56,14 +56,14 @@ router.post('/', auth(), (req, res) => {
                 res.render('notify/index', { redirect, success, mensagem, menu, submenu })
             }
             success = true
-            redirect = '/predefinicao/lista'
+            redirect = '/problema/lista'
             res.render('notify/index', { redirect, success, menu, submenu })
         })
 })
 
 router.delete('/:id(\\d+)', global.auth(), (req, res) => {
 
-    predefinicaoRest.delete(req.params.id)
+    problemaRest.delete(req.params.id)
         .end((error, result) => {
             if (error) {
                 console.log(error)

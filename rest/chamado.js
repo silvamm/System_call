@@ -6,6 +6,7 @@ class ChamadoRest {
     get(id) {
         return superagent.get(global.url + '/chamado/' + id)
     }
+
     list(query) {
         if (query)
             return superagent.get(global.url + '/chamado/query').send(query)

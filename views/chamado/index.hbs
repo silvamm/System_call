@@ -107,7 +107,7 @@
           {{#each chamados}}
           <tr>
             <td>{{protocolo}}</td>
-            <td>{{predefinicao.nome}}</td>
+            <td>{{problema.nome}}</td>
             {{#if ../session.usuario.admin}}<td>{{criadoPor.setor.nome}}</td>{{/if}}
             <td>{{status}}</td>
             <td>{{prioridade}}</td>
@@ -115,7 +115,7 @@
               {{#if ../session.usuario.admin}}
               <button style="width: 95px;" title="Aceitar" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Aceitar</button>
               {{/if}}
-              <button style="width: 95px;" class="btn btn-primary btn-sm my-sm-1"><i class="fa fa-eye"></i> Detalhes</button>
+              <a style="width: 95px;" href="/chamado/{{id}}" class="btn btn-primary btn-sm my-sm-1"><i class="fa fa-eye"></i> Detalhes</a>
               {{#if ../session.usuario.admin}}
               <button style="width: 95px;" class="btn btn-danger btn-sm "><i class="fa fa-times "></i> Encerrar</button>
               {{/if}}

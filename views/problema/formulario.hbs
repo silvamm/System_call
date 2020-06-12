@@ -4,16 +4,16 @@
 <section class="card">
     <div class="card-header">Salvar Problema</div>
     <div class="card-body">
-        <form class="" action="/predefinicao/" method="post" id="form">
-            <input type="hidden" name="id" value="{{predefinicao.id}}" />
+        <form class="" action="/problema/" method="post" id="form">
+            <input type="hidden" name="id" value="{{problema.id}}" />
 
             <div class="form-group">
                 <label for="nome">Nome:</label>
-                <input class="form-control" type="text" name="nome" value="{{predefinicao.nome}}">
+                <input class="form-control" type="text" name="nome" value="{{problema.nome}}">
             </div>
            
             <div class="float-right">
-                <a type="submit" class="btn btn-danger" href="/predefinicao/lista">Cancelar</a>
+                <a type="submit" class="btn btn-danger" href="/problema/lista">Cancelar</a>
                 <button type="submit" class="btn btn-success">Cadastrar</button>
             </div>
         </form>

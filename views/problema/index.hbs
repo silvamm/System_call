@@ -36,7 +36,7 @@
     Problemas
   </div>
   <div class="card-body">
-    <a class="btn btn-primary float-right" href="/predefinicao"><i class="fa fa-plus"></i> Adicionar</a>
+    <a class="btn btn-primary float-right" href="/problema"><i class="fa fa-plus"></i> Adicionar</a>
 
     <table class="table table-bordered table-hover my-5">
       <thead>
@@ -46,11 +46,11 @@
         </tr>
       </thead>
       <tbody>
-        {{#each predefinicoes}}
+        {{#each problemas}}
         <tr>
           <td>{{nome}}</td>
           <td class="text-center">
-            <a style="width: 80px;" type="button" class="btn btn-primary btn-sm my-1 " value="Editar" href='/predefinicao/{{id}}'><i
+            <a style="width: 80px;" type="button" class="btn btn-primary btn-sm my-1 " value="Editar" href='/problema/{{id}}'><i
                 class="fa fa-pencil"></i> Editar</a>
             <button style="width: 80px;" type="button" class="btn btn-danger btn-sm" value="Excluir" onclick='excluir(this, {{id}})'><i
                 class="fa fa-trash-o"></i> Excluir</button></td>
@@ -68,7 +68,7 @@
         if (confirm("Deseja realmente excluir o registro ? ")) {
             $.ajax({
                 type: 'delete',
-                url: '/predefinicao/' + id
+                url: '/problema/' + id
             }).done(function () {
                 let tr = $(item).closest('tr')
                 tr.fadeOut(500, () => tr.remove())
@@ -78,8 +78,5 @@
         }
     }
 
-    function editar(id) {
-        window.location = '/predefinicao/' + Number(id)
-    }
 </script>
 {{/section}}
