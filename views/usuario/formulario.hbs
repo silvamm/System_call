@@ -8,13 +8,13 @@
 
             <div class="mb-2" id="resposta"></div>
             <div class="form-group">
-                <label for="nome">Nome:</label>
+                <label for="nome">Nome</label>
                 <input class="form-control" type="text" name="nome" id="nome" value="{{usuario.nome}}">
             </div>
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label for="tipo">Tipo de Usuário:</label>
+                        <label for="tipo">Tipo de Usuário</label>
                         <select name="tipo" class="form-control" id="tipo">
                             <option disabled selected value> Selecione </option>
                             <option value="0" {{selected 'COMUM' ./usuario.tipo}}>COMUM</option>
@@ -24,7 +24,7 @@
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="setor">Setor:</label>
+                        <label for="setor">Setor</label>
                         <select name="setor[id]" class="form-control" id="setor">
                             <option disabled selected value> Selecione </option>
                             {{#each setores}}
@@ -37,13 +37,13 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label for="e-mail">Endereço de e-mail:</label>
+                        <label for="e-mail">Endereço de e-mail</label>
                         <input class="form-control" type="text" name="email" id="email" value="{{usuario.email}}">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="senha">Digite a senha:</label>
+                        <label for="senha">Digite a senha</label>
                         <input class="form-control" type="password" name="senha" id="senha" {{#if usuario.id}}
                             placeholder="Deixe em branco para manter a senha atual" {{/if}}>
                     </div>
@@ -51,7 +51,7 @@
             </div>
             <div class="float-right">
                 <a type="submit" class="btn btn-danger" href="/usuario/lista">Cancelar</a>
-                <button type="submit" class="btn btn-success">Cadastrar</button>
+                <button type="submit" class="btn btn-success">Salvar</button>
             </div>
         </form>
     </div>

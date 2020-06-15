@@ -1,10 +1,44 @@
 const
     express = require('express'),
     router = express.Router(),
-    predefinicaoRest = require('../rest/problema.js'),
+    problemaRest = require('../rest/problema.js'),
     chamadoRest = require('../rest/chamado.js'),
     setorRest = require('../rest/setor.js'),
     menu = 'chamado'
+
+router.post('/status/:id(\\d+)', auth(), (req, res) => {
+
+    let
+        id = req.params.id,
+        status = req.body.status
+
+    chamadoRest
+        .get(id)
+        .end((error, result) => {
+            if (error) {
+                console.log(error)
+            }
+
+            let chamado = result.body
+
+            if (status == 'VISUALIZADO' && chamado.status == 'PENDENTE') {
+                chamado.status = status
+            } else if (status == chamado.status) {
+                return res.sendStatus(202);
+            } else if (status != 'VISUALIZADO') {
+                chamado.status = status
+            }
+
+
+            chamadoRest.put(chamado).end((error, result) => {
+                if (error)
+                    console.log(error)
+
+                chamado = result.body
+                return res.status(200).send(chamado);
+            })
+        })
+})
 
 router.get('/lista', auth(), (req, res) => {
 
@@ -43,14 +77,14 @@ router.get('/lista', auth(), (req, res) => {
 
 router.get('/', auth(), (req, res) => {
 
-    predefinicaoRest
+    problemaRest
         .list()
         .end((error, result) => {
             if (error) {
                 console.log(error)
             }
-            let predefinicoes = result.body
-            res.render('chamado/formulario', { predefinicoes, menu })
+            let problemas = result.body
+            res.render('chamado/formulario', { problemas, menu })
         })
 
 })
@@ -59,14 +93,20 @@ router.get('/:id(\\d+)', auth(), (req, res) => {
 
     Promise
         .all([
-            predefinicaoRest.list(),
+            problemaRest.list(),
             chamadoRest.get(req.params.id)
         ])
         .then((results) => {
             let problemas = results[0].body
             let chamado = results[1].body
 
+            console.log("GET ID")
+
+            console.log(chamado)
+
             res.render('chamado/formulario', { chamado, problemas })
+
+
         })
         .catch((error) => console.log(error))
 
@@ -79,7 +119,6 @@ router.post('/', auth(), (req, res) => {
         chamado = req.body
 
     chamado.criadoPor.id = req.session.usuario.id
-    chamado.criadoEm = Number(chamado.criadoEm)
 
     if (chamado.id)
         promise = chamadoRest.put(chamado)

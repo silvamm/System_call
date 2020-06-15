@@ -1,4 +1,5 @@
 {{#section 'css'}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 {{/section}}
 
 <form action="/chamado/lista" method="get">
@@ -20,8 +21,7 @@
               <option value="0" {{selected '0' ./query.status}}>Chamados pendentes</option>
               <option value="1" {{selected '1' ./query.status}}>Chamados visualizados</option>
               <option value="2" {{selected '2' ./query.status}}>Chamados aceitos</option>
-              <option value="3" {{selected '3' ./query.status}}>Chamados cancelados</option>
-              <option value="4" {{selected '4' ./query.status}}>Chamados encerrados</option>
+              <option value="3" {{selected '3' ./query.status}}>Chamados encerrados</option>
             </select>
           </div>
         </div>
@@ -42,26 +42,13 @@
 
         <div class="col-12 col-sm-12 col-md-12 col-lg-12  
         {{#if session.usuario.admin}}
-          col-xl-3
-        {{else}}
           col-xl-5
+        {{else}}
+          col-xl-7
         {{/if}}">
           <div class="form-group">
             <input class="form-control" type="search" value="{{query.protocolo}}" placeholder="Protocolo"
               name="protocolo">
-          </div>
-        </div>
-
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-2">
-          <div class="form-group">
-            <select class="form-control" name="exibir">
-              <option value="10">10 Registros</option>
-              <option value="20">20 Registros</option>
-              <option value="30">30 Registros</option>
-              <option value="40">40 Registros</option>
-              <option value="50">50 Registros</option>
-              <option value="100">100 Registros</option>
-            </select>
           </div>
         </div>
 
@@ -98,8 +85,8 @@
             <th scope="col">Protocolo</th>
             <th scope="col">Problema</th>
             {{#if session.usuario.admin}}<th scope="col">Setor</th>{{/if}}
-            <th scope="col">Situação</th>
             <th scope="col">Prioridade</th>
+            <th scope="col">Situação</th>
             <th scope="col" style="width: 30%;" class="text-center col-lg-4">Ações</th>
           </tr>
         </thead>
@@ -109,15 +96,15 @@
             <td>{{protocolo}}</td>
             <td>{{problema.nome}}</td>
             {{#if ../session.usuario.admin}}<td>{{criadoPor.setor.nome}}</td>{{/if}}
-            <td>{{status}}</td>
             <td>{{prioridade}}</td>
+            <td id="status-{{id}}">{{status}}</td>
             <td class="text-center">
               {{#if ../session.usuario.admin}}
-              <button style="width: 95px;" title="Aceitar" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Aceitar</button>
+              <button id="btnAceitar-{{id}}" style="width: 95px;" onclick="aceitar({{id}})" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Aceitar</button>
               {{/if}}
-              <a style="width: 95px;" href="/chamado/{{id}}" class="btn btn-primary btn-sm my-sm-1"><i class="fa fa-eye"></i> Detalhes</a>
+              <button style="width: 95px;" onclick="visualizar({{id}})" class="btn btn-primary btn-sm my-sm-1"><i class="fa fa-eye"></i> Detalhes</a>
               {{#if ../session.usuario.admin}}
-              <button style="width: 95px;" class="btn btn-danger btn-sm "><i class="fa fa-times "></i> Encerrar</button>
+              <button id="btnEncerrar-{{id}}" style="width: 95px;" onclick="encerrar({{id}})" class="btn btn-danger btn-sm "><i class="fa fa-times "></i> Encerrar</button>
               {{/if}}
             </td>
           </tr>
@@ -136,4 +123,55 @@
 </section>
 
 {{#section 'js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+function aceitar(id){
+  $.ajax({
+    type: 'post',
+    url: '/chamado/status/' + id,
+    data: { status : 'ACEITO' }
+  }).done((resultado)=> {
+
+    if(resultado == 'Accepted')
+      return toastr.warning('Chamado já esta aceito!', 'Atenção!', {progressBar : true, timeOut: 5000})   
+    
+    $('#status-' + id).html(resultado.status)
+    $('#btnAceitar-'+ id).prop('disabled', true)
+    toastr.success('Chamado aceito com sucesso!', 'Aceito!', {progressBar : true, timeOut: 5000})
+
+  }).fail((error)=>{
+       toastr.error('Não foi possivel realizar a operação!', 'Falha!', {progressBar : true, timeOut: 5000})
+  })
+}
+function encerrar(id){
+  $.ajax({
+    type: 'post',
+    url: '/chamado/status/' + id, 
+    data: { status: 'ENCERRADO' }
+ }).done((resultado)=> {
+
+    if(resultado == 'Accepted')
+      return toastr.warning('Chamado já esta encerrado!', 'Atenção!', {progressBar : true, timeOut: 5000})   
+
+   $('#status-' + id).html(resultado.status)
+   $('#btnEncerrar-'+ id).prop('disabled', true)
+   toastr.success('Chamado encerrado com sucesso!', 'Encerrado!', {progressBar : true, timeOut: 5000})
+
+ }).fail((error)=>{
+      toastr.error('Não foi possivel realizar a operação!', 'Falha!', {progressBar : true, timeOut: 5000})
+  })
+}
+function visualizar(id){
+  $.ajax({
+    type: 'post',
+    url: '/chamado/status/' + id, 
+    data: { status: 'VISUALIZADO' }
+  }).done((resultado)=> {
+    window.location =  "/chamado/" + id
+  }).fail((error)=>{
+    toastr.error('Não foi possivel realizar a operação!', 'Falha!', {progressBar : true, timeOut: 5000})
+  })
+}
+
+</script>
 {{/section}}

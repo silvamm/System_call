@@ -7,7 +7,7 @@ const
     menu = 'cadastro',
     submenu = 'usuario'
 
-router.get('/', (req, res) => {
+router.get('/', auth(), (req, res) => {
 
     setorRest
         .list()
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 
 })
 
-router.get('/:id(\\d+)', (req, res) => {
+router.get('/:id(\\d+)', auth(), (req, res) => {
 
     let setores, usuario
 
@@ -35,7 +35,7 @@ router.get('/:id(\\d+)', (req, res) => {
 
 })
 
-router.get('/lista', (req, res) => {
+router.get('/lista', auth(), (req, res) => {
 
     let
         setores,
@@ -73,7 +73,7 @@ router.get('/lista', (req, res) => {
 
 })
 
-router.post('/', (req, res) => {
+router.post('/', auth(), (req, res) => {
 
     let
         promise,
@@ -106,7 +106,7 @@ router.post('/', (req, res) => {
         })
 })
 
-router.delete('/:id(\\d+)', global.auth(), (req, res) => {
+router.delete('/:id(\\d+)', auth(), (req, res) => {
 
     superagent
         .delete('https://softrec.com.br/usuario/' + req.params.id)
