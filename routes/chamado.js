@@ -20,15 +20,7 @@ router.post('/status/:id(\\d+)', auth(), (req, res) => {
             }
 
             let chamado = result.body
-
-            if (status == 'VISUALIZADO' && chamado.status == 'PENDENTE') {
-                chamado.status = status
-            } else if (status == chamado.status) {
-                return res.sendStatus(202);
-            } else if (status != 'VISUALIZADO') {
-                chamado.status = status
-            }
-
+            chamado.status = status
 
             chamadoRest.put(chamado).end((error, result) => {
                 if (error)
@@ -43,12 +35,14 @@ router.post('/status/:id(\\d+)', auth(), (req, res) => {
 router.get('/lista', auth(), (req, res) => {
 
     let
-        chamados,
-        setores,
         usuario = req.session.usuario,
         query = {}
 
     query.protocolo = req.query.protocolo
+
+    query.limite = req.query.limite ? req.query.limite : 10
+
+    query.pagina = req.query.pagina ? req.query.pagina : 0
 
     if (req.query.setor)
         query.idSetor = req.query.setor.id
@@ -66,10 +60,15 @@ router.get('/lista', auth(), (req, res) => {
 
         ])
         .then((results) => {
-            setores = results[0].body
-            chamados = results[1].body
 
-            return res.render('chamado/index', { chamados, setores, query, menu })
+            let chamados, setores, paginacao
+
+            setores = results[0].body
+            paginacao = results[1].body
+
+            console.log(paginacao)
+
+            return res.render('chamado/index', { setores, query, menu, paginacao })
 
         }).catch(error => console.log(error))
 
@@ -100,12 +99,7 @@ router.get('/:id(\\d+)', auth(), (req, res) => {
             let problemas = results[0].body
             let chamado = results[1].body
 
-            console.log("GET ID")
-
-            console.log(chamado)
-
-            res.render('chamado/formulario', { chamado, problemas })
-
+            res.render('chamado/visualizacao', { chamado })
 
         })
         .catch((error) => console.log(error))
@@ -120,10 +114,12 @@ router.post('/', auth(), (req, res) => {
 
     chamado.criadoPor.id = req.session.usuario.id
 
-    if (chamado.id)
-        promise = chamadoRest.put(chamado)
-    else
-        promise = chamadoRest.post(chamado)
+    promise = chamadoRest.post(chamado)
+
+    // if (chamado.id)
+    //     promise = chamadoRest.put(chamado)
+    // else
+    //     
 
     let
         redirect,

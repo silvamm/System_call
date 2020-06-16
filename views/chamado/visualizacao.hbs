@@ -1,0 +1,164 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+{{/section}}
+
+<section class="card">
+    <div class="card-header">Salvar Chamado</div>
+    <div class="card-body">
+        <input type="hidden" name="id" value="{{chamado.id}}" />
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Protocolo</label>
+                    <input class="form-control" type="text" value={{chamado.protocolo}} readonly />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label>Aberto por</label>
+                    <input class="form-control" type="text" value={{chamado.criadoPor.nome}} readonly />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label>Setor</label>
+                    <input class="form-control" type="text" value={{chamado.criadoPor.setor.nome}} readonly />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label>Aberto em</label>
+                    <input id="criadoEm" class="form-control" type="text" readonly />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label>Encerrado em</label>
+                    <input id="encerradoEm" class="form-control" type="text" value="Em atividade" readonly />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="problema[id]">Problema</label>
+                    <input class="form-control" value={{chamado.problema.nome}} readonly />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="tipo">Status</label>
+                    <input id="status" class="form-control" value={{chamado.status}} readonly />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="descricao">Descrição</label>
+            <textarea class="form-control" name="descricao" readonly>{{chamado.descricao}}</textarea>
+        </div>
+
+        <div class="float-right">
+            <a class="btn btn-info" href="/chamado/lista"><i class="fa fa-arrow-left"></i> Voltar</a>
+            {{#if session.usuario.admin}}
+            <button id="btnAceitar" onclick="aceitar({{chamado.id}})" class="btn btn-success "><i
+                    class="fa fa-check"></i> Aceitar</button>
+            <button id="btnEncerrar" onclick="encerrar({{chamado.id}})" class="btn btn-danger  "><i
+                    class="fa fa-times "></i> Encerrar</button>
+            {{/if}}
+        </div>
+    </div>
+</section>
+
+
+{{#section 'js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+{{#if session.usuario.admin}}
+<script>
+
+    function capitalize(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    $(() => {
+        let status = '{{chamado.status}}'
+        status = capitalize(status)
+        if (status === 'Aceito') {
+            desativarBtnAceitar()
+        } else if (status === 'Encerrado') {
+            desativarBtnAceitar()
+            desativarBtnEncerrar()
+        }
+    })
+
+    function aceitar(id) {
+        if (confirm("Deseja realmente ACEITAR o chamado ? ")) {
+            $.ajax({
+                type: 'post',
+                url: '/chamado/status/' + id,
+                data: { status: 'Aceito' }
+            }).done((resultado) => {
+
+                if (resultado == 'Accepted')
+                    return toastr.warning('Chamado já esta aceito!', 'Atenção!', { progressBar: true, timeOut: 5000 })
+
+                $('#status').val(resultado.status)
+                desativarBtnAceitar()
+                toastr.success('Chamado aceito com sucesso!', 'Aceito!', { progressBar: true, timeOut: 5000 })
+
+            }).fail((error) => {
+                toastr.error('Não foi possivel realizar a operação!', 'Falha!', { progressBar: true, timeOut: 5000 })
+            })
+        }
+    }
+    function encerrar(id) {
+        if (confirm("Deseja realmente ENCERRAR o chamado ? ")) {
+            $.ajax({
+                type: 'post',
+                url: '/chamado/status/' + id,
+                data: { status: 'Encerrado' }
+            }).done((resultado) => {
+
+                if (resultado == 'Accepted')
+                    return toastr.warning('Chamado já esta encerrado!', 'Atenção!', { progressBar: true, timeOut: 5000 })
+
+                $('#status').val(resultado.status)
+                desativarBtnAceitar()
+                desativarBtnEncerrar()
+                toastr.success('Chamado encerrado com sucesso!', 'Encerrado!', { progressBar: true, timeOut: 5000 })
+
+            }).fail((error) => {
+                toastr.error('Não foi possivel realizar a operação!', 'Falha!', { progressBar: true, timeOut: 5000 })
+            })
+        }
+    }
+
+    function desativarBtnAceitar() {
+        $('#btnAceitar').prop('disabled', true)
+        $('#btnAceitar').prop('onclick', null).off('click')
+    }
+
+    function desativarBtnEncerrar() {
+        $('#btnEncerrar').prop('disabled', true)
+        $('#btnEncerrar').prop('onclick', null).off('click')
+    }
+
+</script>
+{{/if}}
+<script>
+    let criadoEm = new Date("{{chamado.criadoEm}}")
+    var options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+    $('#criadoEm').val(criadoEm.toLocaleDateString('pt-BR', options));
+
+    let dado = '{{chamado.encerradoEm}}'
+    if (dado) {
+        let encerradoEm = new Date("{{chamado.encerradoEm}}")
+        var options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+        $('#encerradoEm').val(encerradoEm.toLocaleDateString('pt-BR', options));
+    }
+
+
+</script>
+{{/section}}

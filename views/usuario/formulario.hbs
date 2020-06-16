@@ -3,29 +3,29 @@
 <section class="card">
     <div class="card-header">Salvar Usuário</div>
     <div class="card-body">
-        <form class="" action="/usuario/" method="post" id="form">
+        <form class="cmxform" action="/usuario/" method="post" id="form">
             <input type="hidden" id="id" name="id" value="{{usuario.id}}" />
 
             <div class="mb-2" id="resposta"></div>
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input class="form-control" type="text" name="nome" id="nome" value="{{usuario.nome}}">
+                <input class="form-control" type="text" name="nome" id="nome" value="{{usuario.nome}}" required>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="form-group">
                         <label for="tipo">Tipo de Usuário</label>
-                        <select name="tipo" class="form-control" id="tipo">
+                        <select name="tipo" class="form-control" id="tipo" required>
                             <option disabled selected value> Selecione </option>
-                            <option value="0" {{selected 'COMUM' ./usuario.tipo}}>COMUM</option>
-                            <option value="1" {{selected 'ADMINISTRADOR' ./usuario.tipo}}>ADMINISTRADOR</option>
+                            <option value="Comum" {{selected 'Comum' ./usuario.tipo}}>Comum</option>
+                            <option value="Administrador" {{selected 'Administrador' ./usuario.tipo}}>Administrador</option>
                         </select>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
                         <label for="setor">Setor</label>
-                        <select name="setor[id]" class="form-control" id="setor">
+                        <select name="setor[id]" class="form-control" id="setor" required>
                             <option disabled selected value> Selecione </option>
                             {{#each setores}}
                             <option  value={{id}} {{selected id ../usuario.setor.id}}>{{nome}}</option>
@@ -37,15 +37,15 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label for="e-mail">Endereço de e-mail</label>
-                        <input class="form-control" type="text" name="email" id="email" value="{{usuario.email}}">
+                        <label for="email">Endereço de e-mail</label>
+                        <input class="form-control" type="text" name="email" id="email" autocomplete="off" value="{{usuario.email}}" required>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
                         <label for="senha">Digite a senha</label>
-                        <input class="form-control" type="password" name="senha" id="senha" {{#if usuario.id}}
-                            placeholder="Deixe em branco para manter a senha atual" {{/if}}>
+                        <input class="form-control" type="password" name="senha" id="senha" autocomplete="new-password" {{#if usuario.id}}
+                            placeholder="Deixe em branco para manter a senha atual" {{else}} required {{/if}}>
                     </div>
                 </div>
             </div>
@@ -59,4 +59,26 @@
 
 {{#section 'js'}}
 <script src="/usuario/js/formulario.js"></script>
+<script src="/assets/js/jquery.validate.min.js"></script>
+<script>
+    $("#form").validate({
+        messages: {
+            "setor[id]": {
+                required: "Favor selecione uma opção"
+            },
+            "tipo": {
+                required: "Favor selecione uma opção"
+            },
+            "senha": {
+                required: "Favor preencher esse campo"
+            },
+            "email": {
+                required: "Favor preencher esse campo"
+            },
+            "nome":{
+                required: "Favor preencher esse campo"
+            }
+        }
+    });
+</script>
 {{/section}}

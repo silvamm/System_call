@@ -4,12 +4,12 @@
 <section class="card">
     <div class="card-header">Salvar Problema</div>
     <div class="card-body">
-        <form class="" action="/problema/" method="post" id="form">
+        <form class="cmxform" action="/problema/" method="post" id="form">
             <input type="hidden" name="id" value="{{problema.id}}" />
 
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input class="form-control" type="text" name="nome" value="{{problema.nome}}">
+                <input class="form-control" type="text" name="nome" value="{{problema.nome}}" required>
             </div>
            
             <div class="float-right">
@@ -21,4 +21,14 @@
 </section>
 
 {{#section 'js'}}
+<script src="/assets/js/jquery.validate.min.js"></script>
+<script>
+    $("#form").validate({
+        messages: {
+            "nome": {
+                required: "Favor preencher esse campo"
+            }
+        }
+    });
+</script>
 {{/section}}

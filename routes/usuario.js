@@ -42,8 +42,6 @@ router.get('/lista', auth(), (req, res) => {
         usuarios,
         query = {}
 
-    console.log(req.query)
-
     query.nomeEmail = req.query.nomeEmail
 
     if (req.query.setor)
@@ -51,8 +49,6 @@ router.get('/lista', auth(), (req, res) => {
 
     if (req.query.tipo)
         query.tipo = req.query.tipo
-
-    console.log(query)
 
     Promise
         .all([
@@ -62,10 +58,6 @@ router.get('/lista', auth(), (req, res) => {
         .then((results) => {
             setores = results[0].body
             usuarios = results[1].body
-
-            usuarios.forEach(usuario =>
-                usuario.tipo = usuario.tipo == 'COMUM' ? 'Comum' : 'Administrador'
-            )
 
             res.render('usuario/index', { usuarios, setores, query, menu, submenu })
 

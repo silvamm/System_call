@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
             usuario.nome = result.body.nome
             usuario.email = result.body.email
             usuario.id = result.body.id
-            usuario.admin = result.body.tipo == 'ADMINISTRADOR' ? true : false
+            usuario.admin = result.body.tipo == 'Administrador' ? true : false
 
             req.session.usuario = usuario
 

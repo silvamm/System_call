@@ -11,8 +11,8 @@
           <div class="form-group">
             <select class="form-control" name="tipo">
               <option value="" {{selected '' ./query.tipo}}>Todos os usuários</option>
-              <option value="0" {{selected '0' ./query.tipo}}>Todos comuns</option>
-              <option value="1" {{selected '1' ./query.tipo}}>Todos adminstradores</option>
+              <option value="Comum" {{selected '0' ./query.tipo}}>Todos comuns</option>
+              <option value="Administrador" {{selected '1' ./query.tipo}}>Todos adminstradores</option>
             </select>
           </div>
         </div>
@@ -56,32 +56,34 @@
     <a class="btn btn-primary float-right" href="/usuario"><i class="fa fa-plus"></i> Adicionar</a>
 
     {{#if usuarios}}
-    <table class="table table-bordered table-hover my-5">
-      <thead>
-        <tr>
-          <th scope="col">Nome</th>
-          <th scope="col">Tipo</th>
-          <th scope="col">Setor</th>
-          <th scope="col">E-mail</th>
-          <th scope="col" style="width: 20%" class="text-center">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each usuarios}}
-        <tr>
-          <td>{{nome}}</td>
-          <td>{{tipo}}</td>
-          <td>{{setor.nome}}</td>
-          <td>{{email}}</td>
-          <td class="text-center">
-            <a style="width: 80px;" type="button" class="btn btn-primary btn-sm my-1" value="Editar" href='/usuario/{{id}}'><i
-                class="fa fa-pencil"></i> Editar</a>
-            <button style="width: 80px;" type="button" class="btn btn-danger btn-sm" value="Excluir" onclick='excluir(this, {{id}})'><i
-                class="fa fa-trash-o"></i> Excluir</button></td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
+    <div class="table-responsive-xl">
+      <table class="table table-bordered table-hover my-5">
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Setor</th>
+            <th scope="col">E-mail</th>
+            <th scope="col" style="width: 20%" class="text-center">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each usuarios}}
+          <tr>
+            <td>{{nome}}</td>
+            <td>{{tipo}}</td>
+            <td>{{setor.nome}}</td>
+            <td>{{email}}</td>
+            <td class="text-center">
+              <a style="width: 80px;" type="button" class="btn btn-primary btn-sm my-1" value="Editar"
+                href='/usuario/{{id}}'><i class="fa fa-pencil"></i> Editar</a>
+              <button style="width: 80px;" type="button" class="btn btn-danger btn-sm" value="Excluir"
+                onclick='excluir(this, {{id}})'><i class="fa fa-trash-o"></i> Excluir</button></td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
     {{else}}
     <div class="row">
       <div class="col text-center">
