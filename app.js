@@ -8,7 +8,7 @@ const
     nconf = require('nconf')
 
 //porta
-const port = 3000
+const port = 3022
 app.listen(port, () => console.log(`Funcionando | Porta : ${port}`))
 
 //nconf

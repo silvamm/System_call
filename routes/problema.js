@@ -61,7 +61,7 @@ router.post('/', auth(), (req, res) => {
         })
 })
 
-router.delete('/:id(\\d+)', global.auth(), (req, res) => {
+router.delete('/:id(\\d+)', auth(), (req, res) => {
 
     problemaRest.delete(req.params.id)
         .end((error, result) => {

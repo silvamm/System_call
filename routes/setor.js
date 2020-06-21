@@ -6,11 +6,11 @@ const
     submenu = 'setor'
 
 
-router.get('/', global.auth(), (req, res) => {
+router.get('/', auth(), (req, res) => {
     res.render('setor/formulario', { menu, submenu })
 })
 
-router.get('/:id(\\d+)', global.auth(), (req, res) => {
+router.get('/:id(\\d+)', auth(), (req, res) => {
     setorRest
         .get(req.params.id)
         .end((error, result) => {
@@ -23,7 +23,7 @@ router.get('/:id(\\d+)', global.auth(), (req, res) => {
 
 })
 
-router.post('/', global.auth(), (req, res) => {
+router.post('/', auth(), (req, res) => {
 
     let
         promise,
@@ -53,7 +53,7 @@ router.post('/', global.auth(), (req, res) => {
         })
 })
 
-router.get('/lista', global.auth(), (req, res) => {
+router.get('/lista', auth(), (req, res) => {
     setorRest
         .list()
         .end((error, result) => {
@@ -67,7 +67,7 @@ router.get('/lista', global.auth(), (req, res) => {
         })
 })
 
-router.delete('/:id(\\d+)', global.auth(), (req, res) => {
+router.delete('/:id(\\d+)', auth(), (req, res) => {
 
     setorRest.delete(req.params.id)
         .end((error, result) => {
