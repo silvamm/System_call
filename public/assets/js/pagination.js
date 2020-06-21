@@ -1,46 +1,59 @@
 var paginate = {
+
     create: function(parametros) {
 
-        var self = parametros.url;
+        let href = parametros.url;
+        let paginas = parseInt(parametros.paginas, 10)
+        let atual = parseInt(parametros.atual, 10)
+        let search = parametros.search
+        let params = ""
+        let html = ""
 
-        var HTML = "";
-        var paginas = parseInt(parametros.paginas, 10);
-        var atual = parseInt(parametros.atual, 10);
-        console.log(paginas)
-        console.log(atual)
-        var params = "";
-        if (atual > 1) {
-            var menos = atual - 1;
-            var url = self + "?pagina=" + menos + params;
-            var url1 = self + "?pagina=1" + params;
-            HTML += "<li class='page-item'><a class='page-link' href=\"" + url1 + "\">Primeira</a></li><li class='page-item' ><a class='page-link' href=\"" + url + "\">Anterior</a></li>";
+        //parametros
+        if (search)
+            search.forEach((name) => {
+                let valueName = $(`#${name}`).val()
+                if (valueName) params += "&" + name + "=" + valueName
+            })
+
+        //primeiro e anterior
+        if (atual > 0) {
+            let anterior = href + "?pagina=" + (atual - 1) + params
+            let primeira = href + "?pagina=0" + params
+            html += "<li class='page-item'><a class='page-link' href=\"" + primeira + "\">Primeira</a></li>"
+            html += "<li><a class='page-link' href=\"" + anterior + "\">Anterior</a></li>"
         }
+
+        //limite
         if (atual < 9) {
-            ini = 1;
+            inicio = 0;
             fim = 10;
         } else {
-            ini = atual - 4;
+            inicio = atual - 4;
             fim = atual + 4;
         }
-        for (var i = 1; i <= paginas; i++) {
+
+        //numeracao
+        for (var i = 0; i < paginas; i++) {
 
             if (i !== atual) {
-                if ((i >= ini) && (i <= fim)) {
-                    url = self + "?pagina=" + i + params;
-                    HTML += " <li class='page-item'><a class='page-link' href=\"" + url + "\">" + i + "</a></li> ";
+                if ((i >= inicio) && (i <= fim)) {
+                    url = href + "?pagina=" + i + params;
+                    html += " <li class='page-item'><a class='page-link' href=\"" + url + "\">" + (i + 1) + "</a></li> ";
                 }
-
             } else {
-                HTML += " <li class=\"page-item active\"><a class='page-link' href=\"javascript:void(0);\">" + i + "</a></li>";
+                html += " <li class=\"page-item active\"><a class='page-link' href=\"javascript:void(0);\">" + (i + 1) + "</a></li>";
             }
         }
-        if (atual < paginas) {
-            mais = atual + 1;
-            url = self + "?page=" + mais + params;
-            url2 = self + "?page=" + paginas + params;
-            HTML += " <li class='page-item'><a class='page-link' href=\"" + url + "\">Pr&oacute;xima</a></li><li><a class='page-link' href=\"" + url2 + "\">&Uacute;ltima</a></li>";
+
+        //proxima e ultima
+        if (atual < paginas - 1) {
+            let proxima = href + "?pagina=" + (atual + 1) + params;
+            let ultima = href + "?pagina=" + (paginas - 1) + params;
+            html += " <li class='page-item'><a class='page-link' href=\"" + proxima + "\">Pr&oacute;xima</a></li><li class='page-item' ><a class='page-link' href=\"" + ultima + "\">&Uacute;ltima</a></li>";
         }
 
-        $("ul#pagination").html(HTML);
+        $("ul#pagination").html(html);
     }
+
 };

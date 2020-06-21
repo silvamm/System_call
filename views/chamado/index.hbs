@@ -15,7 +15,7 @@
         {{/if}}">
 
           <div class="form-group">
-            <select class="form-control" name="status">
+            <select class="form-control" name="status" id="status">
               <option value="" {{selected '' ./query.status}}>Todos os chamados</option>
               <option value="Pendente" {{selected 'Pendente' ./query.status}}>Chamados pendentes</option>
               <option value="Visualizado" {{selected 'Visualizado' ./query.status}}>Chamados visualizados</option>
@@ -29,7 +29,7 @@
         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-2">
           <div class="form-group">
 
-            <select class="form-control" name="setor[id]">
+            <select class="form-control" name="setor[id]" id="setor">
               <option value="">Todos os setores</option>
               {{#each setores}}
               <option value="{{id}}" {{selected id ../query.idSetor}}>{{nome}}</option>
@@ -47,13 +47,13 @@
         {{/if}}">
           <div class="form-group">
             <input class="form-control" type="search" value="{{query.protocolo}}" placeholder="Protocolo"
-              name="protocolo">
+              name="protocolo" id="protocolo">
           </div>
         </div>
 
         <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-2">
           <div class="form-group">
-            <select class="form-control" name="limite">
+            <select class="form-control" name="limite" id="limite">
               <option value="10" {{selected '10' ./query.limite}}>10 Registros</option>
               <option value="20" {{selected '20' ./query.limite}}>20 Registros</option>
               <option value="30" {{selected '30' ./query.limite}}>30 Registros</option>
@@ -95,6 +95,7 @@
       <table class="table table-bordered table-hover">
         <thead>
           <tr>
+            <th scope="col">#</th>
             <th scope="col">Protocolo</th>
             <th scope="col">Problema</th>
             {{#if session.usuario.admin}}<th scope="col">Setor</th>{{/if}}
@@ -105,6 +106,7 @@
         <tbody>
           {{#each paginacao.chamados}}
           <tr>
+            <th scope="row">{{incrementByPage @index ../paginacao.atual }} </th>
             <td>{{protocolo}}</td>
             <td>{{problema.nome}}</td>
             {{#if ../session.usuario.admin}}<td>{{criadoPor.setor.nome}}</td>{{/if}}
@@ -149,36 +151,21 @@
 </section>
 
 {{#section 'js'}}
-<script src="/assets/js/pagination.js"></script>
+<script src="/assets/js/pagination.js"></script> 
 <script>
 
-  $(() => {
+$(() => {
+
     paginate.create({
+      "search": ['protocolo', 'setor[id]', 'limite', 'status'],
       "atual": "{{paginacao.atual}}",
       "paginas": "{{paginacao.paginas}}",
       "url": "/chamado/lista"
-    });
-  })
-
+    }); 
+  })   
+  
   function visualizar(id) {
-
-    let admin = '{{session.usuario.admin}}' === 'true' ? true : false
-    let status = $('#status-' + id).text()
-
-    if (!admin || (admin && status != 'Pendente'))
       return window.location = '/chamado/' + id
-
-    if (admin && status == 'Pendente') {
-      $.ajax({
-        type: 'post',
-        url: '/chamado/status/' + id,
-        data: { status: 'Visualizado' }
-      }).done((resultado) => {
-        window.location = "/chamado/" + id
-      }).fail((error) => {
-        toastr.error('Não foi possivel realizar a operação!', 'Falha!', { progressBar: true, timeOut: 5000 })
-      })
-    }
   }
 
 </script>

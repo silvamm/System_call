@@ -125,6 +125,7 @@
                     return toastr.warning('Chamado já esta encerrado!', 'Atenção!', { progressBar: true, timeOut: 5000 })
 
                 $('#status').val(resultado.status)
+                $('#encerradoEm').val(formatarData(resultado.encerradoEm))
                 desativarBtnAceitar()
                 desativarBtnEncerrar()
                 toastr.success('Chamado encerrado com sucesso!', 'Encerrado!', { progressBar: true, timeOut: 5000 })
@@ -157,6 +158,12 @@
         let encerradoEm = new Date("{{chamado.encerradoEm}}")
         var options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
         $('#encerradoEm').val(encerradoEm.toLocaleDateString('pt-BR', options));
+    }
+
+    function formatarData(data){
+        data = new Date(data)
+        var options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }
+        return data.toLocaleDateString('pt-BR', options)
     }
 
 

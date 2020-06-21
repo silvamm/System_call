@@ -68,9 +68,10 @@ app.engine('hbs',
                 if (key == value)
                     return options.fn(this)
             },
-            ifnot: function(conditional, options) {
-                if (!conditional)
-                    return options.fn(this)
+            incrementByPage: function(key, value, options) {
+                value = parseInt(value) * 10
+                key = parseInt(key)
+                return value + key + 1;
             }
         },
         extname: 'hbs'

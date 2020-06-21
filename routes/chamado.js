@@ -39,9 +39,7 @@ router.get('/lista', auth(), (req, res) => {
         query = {}
 
     query.protocolo = req.query.protocolo
-
     query.limite = req.query.limite ? req.query.limite : 10
-
     query.pagina = req.query.pagina ? req.query.pagina : 0
 
     if (req.query.setor)
@@ -61,12 +59,8 @@ router.get('/lista', auth(), (req, res) => {
         ])
         .then((results) => {
 
-            let chamados, setores, paginacao
-
             setores = results[0].body
             paginacao = results[1].body
-
-            console.log(paginacao)
 
             return res.render('chamado/index', { setores, query, menu, paginacao })
 
@@ -92,14 +86,28 @@ router.get('/:id(\\d+)', auth(), (req, res) => {
 
     Promise
         .all([
-            problemaRest.list(),
+
             chamadoRest.get(req.params.id)
         ])
         .then((results) => {
-            let problemas = results[0].body
-            let chamado = results[1].body
 
-            res.render('chamado/visualizacao', { chamado })
+            let chamado = results[0].body
+
+            let usuario = req.session.usuario
+            if (!usuario.admin)
+                return res.render('chamado/visualizacao', { chamado })
+
+
+            if (chamado.status == 'Pendente' && usuario.admin) {
+                chamado.status = 'Visualizado'
+                chamadoRest.put(chamado).end((error, result) => {
+                    if (error)
+                        console.log(error)
+                    chamado = result.body
+                })
+            }
+
+            return res.render('chamado/visualizacao', { chamado })
 
         })
         .catch((error) => console.log(error))
@@ -115,11 +123,6 @@ router.post('/', auth(), (req, res) => {
     chamado.criadoPor.id = req.session.usuario.id
 
     promise = chamadoRest.post(chamado)
-
-    // if (chamado.id)
-    //     promise = chamadoRest.put(chamado)
-    // else
-    //     
 
     let
         redirect,

@@ -1,7 +1,8 @@
 {{#section 'css'}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 {{/section}}
 
-<section class="card">
+{{!-- <section class="card">
     <div class="card-header">Filtros</div>
     <div class="card-body">
 
@@ -19,7 +20,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 <section class="card">
     <div class="card-header">
@@ -55,6 +56,7 @@
 
 
 {{#section 'js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
     function excluir(item, id) {
         if (confirm("Deseja realmente excluir o registro ? ")) {
@@ -65,7 +67,7 @@
                 let tr = $(item).closest('tr')
                 tr.fadeOut(500, () => tr.remove())
             }).fail(function (jXHR) {
-                console.log('Aconteceu um erro')
+                toastr.warning('Não é possivel excluir setores com usuários.', 'Atenção!', { progressBar: true, timeOut: 5000 })
             })
         }
     }
