@@ -3,7 +3,8 @@
 {{/section}}
 
 <section class="card">
-    <div class="card-header">Salvar Chamado</div>
+    <div class="card-header">Visualizar Chamado 
+        {{#unless chamado.encerradoEm}}- Duração: <span id="duracao">Carregando ...</span>{{/unless}}</div>
     <div class="card-body">
         <input type="hidden" name="id" value="{{chamado.id}}" />
 
@@ -74,9 +75,24 @@
 
 
 {{#section 'js'}}
+<script src="/assets/js/humanize-duration.js"></script>
+<script src="/assets/js/moment-with-locales.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 {{#if session.usuario.admin}}
 <script>
+
+function update() {
+  
+  var duracoes = $('#duracao');
+  var x = moment("{{chamado.criadoEm}}", "YYYYMMDD h:mm:ss")
+  var y = new moment()
+  var duration = moment.duration(x.diff(y))
+  
+  $('#duracao').html(humanizeDuration(duration, { language: "pt" , round: true }));
+}
+
+moment.locale('pt-br');
+setInterval(update, 1000);
 
     function capitalize(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
