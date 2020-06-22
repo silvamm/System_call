@@ -1,4 +1,23 @@
 {{#section 'css'}}
+<style>
+.circle{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;"
+}
+.pulse {
+  animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 0px rgba(169, 216, 110);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(169, 216, 110, 0);
+  }
+}
+</style>
 {{/section}}
 
 <form action="/chamado/lista" method="get">
@@ -112,12 +131,12 @@
             {{#if ../session.usuario.admin}}<td>{{criadoPor.setor.nome}}</td>{{/if}}
             <td class="text-center">
 
-              <span class="badge
+              <span class="circle badge
                 {{#equals status 'Pendente'}} badge-secondary{{/equals}}
                 {{#equals status 'Visualizado'}} badge-info {{/equals}}
-                {{#equals status 'Aceito'}} badge-success {{/equals}}
+                {{#equals status 'Aceito'}} badge-success pulse {{/equals}}
                 {{#equals status 'Encerrado'}} badge-danger {{/equals}}
-                p-1">
+                ">
               </span>
               <span id="status-{{id}}" style="display: inline-block; width: 80px;">{{status}}</span>
             </td>
@@ -153,7 +172,6 @@
 {{#section 'js'}}
 <script src="/assets/js/pagination.js"></script> 
 <script>
-
 $(() => {
 
     paginate.create({

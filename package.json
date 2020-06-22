@@ -29,6 +29,7 @@
     "nconf": "^0.10.0",
     "redis": "^3.0.2",
     "session-file-store": "^1.4.0",
+    "socket.io": "^2.3.0",
     "superagent": "^5.2.2"
   },
   "devDependencies": {

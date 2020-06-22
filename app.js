@@ -5,10 +5,9 @@ const
     path = require('path'),
     session = require('express-session'),
     redis = require('redis'),
-    nconf = require('nconf')
+    nconf = require('nconf'),
+    port = 3022
 
-//porta
-const port = 3022
 app.listen(port, () => console.log(`Funcionando | Porta : ${port}`))
 
 //nconf

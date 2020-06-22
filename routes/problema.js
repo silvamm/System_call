@@ -37,6 +37,7 @@ router.post('/', auth(), (req, res) => {
         promise,
         problema = req.body
 
+    console.log(problema)
     if (problema.id)
         promise = problemaRest.put(problema)
     else
@@ -50,14 +51,14 @@ router.post('/', auth(), (req, res) => {
     promise
         .end((error, result) => {
             if (error) {
-                res.sendStatus(error.status)
+                console.log(error)
                 success = false
                 mensagem = error.response.body.message
-                res.render('notify/index', { redirect, success, mensagem, menu, submenu })
+                return res.render('notify/index', { redirect, success, mensagem, menu, submenu })
             }
             success = true
             redirect = '/problema/lista'
-            res.render('notify/index', { redirect, success, menu, submenu })
+            return res.render('notify/index', { redirect, success, menu, submenu })
         })
 })
 

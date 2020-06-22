@@ -8,31 +8,31 @@
         <input type="hidden" name="id" value="{{chamado.id}}" />
 
         <div class="row">
-            <div class="col">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl">
                 <div class="form-group">
                     <label>Protocolo</label>
                     <input class="form-control" type="text" value={{chamado.protocolo}} readonly />
                 </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl">
                 <div class="form-group">
                     <label>Aberto por</label>
                     <input class="form-control" type="text" value={{chamado.criadoPor.nome}} readonly />
                 </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl">
                 <div class="form-group">
                     <label>Setor</label>
                     <input class="form-control" type="text" value={{chamado.criadoPor.setor.nome}} readonly />
                 </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-sm-12 col-md-6 col-lg col-xl">
                 <div class="form-group">
                     <label>Aberto em</label>
                     <input id="criadoEm" class="form-control" type="text" readonly />
                 </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-sm-12 col-md-6 col-lg col-xl">
                 <div class="form-group">
                     <label>Encerrado em</label>
                     <input id="encerradoEm" class="form-control" type="text" value="Em atividade" readonly />

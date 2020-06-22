@@ -137,6 +137,7 @@ router.post('/', auth(), (req, res) => {
                 message = error.response.body.message
                 return res.render('notify/', { success, message, menu })
             }
+
             redirect = '/chamado/lista'
             res.render('notify/', { redirect, success, menu })
         })
